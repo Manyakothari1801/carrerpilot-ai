@@ -1,0 +1,8 @@
+careerpilot:
+  security:
+    jwt-secret: test-only-secret-that-is-at-least-32-characters-long
+    access-expiration: PT15M
+    refresh-expiration: P30D
+  password-reset:
+    expiration: PT30M
+    expose-local-token: true

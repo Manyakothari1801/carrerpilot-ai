@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/careerpilot}
+    username: ${DB_USERNAME:careerpilot}
+    password: ${DB_PASSWORD:careerpilot_local}
+  jpa.show-sql: false
+
+careerpilot.password-reset.expose-local-token: ${EXPOSE_LOCAL_RESET_TOKEN:true}

@@ -1,0 +1,2 @@
+import { useAuth } from '../features/auth/AuthContext'
+export function AdminPage(){const{user,logout}=useAuth();return <main className="grid min-h-screen place-items-center bg-slate-950 p-6 text-white"><div className="card max-w-lg"><p className="eyebrow">Admin foundation</p><h1 className="mt-3 text-3xl font-semibold">Welcome, {user?.fullName}</h1><p className="mt-3 text-slate-400">Administrative modules are intentionally deferred.</p><button className="secondary-button mt-6" onClick={()=>void logout()}>Sign out</button></div></main>}

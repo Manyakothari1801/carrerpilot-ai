@@ -1,0 +1,6 @@
+import { useState, type FormEvent } from 'react'
+import { Link } from 'react-router-dom'
+import { api } from '../services/api'
+import { AuthShell } from './AuthPage'
+
+export function ForgotPasswordPage() { const [email, setEmail] = useState(''); const [message, setMessage] = useState(''); const [token, setToken] = useState(''); const [busy, setBusy] = useState(false); const submit = async (event: FormEvent) => { event.preventDefault(); setBusy(true); try { const { data } = await api.post('/auth/forgot-password', { email }); setMessage(data.message); setToken(data.developmentResetToken ?? '') } finally { setBusy(false) } }; return <AuthShell title="Reset your password" subtitle="We’ll prepare secure reset instructions if the account exists."><form onSubmit={submit} className="space-y-4"><label className="block text-sm">Email<input className="input mt-2" type="email" required value={email} onChange={event => setEmail(event.target.value)} /></label><button className="primary-button w-full" disabled={busy}>{busy ? 'Preparing…' : 'Continue'}</button></form>{message && <div className="success-message mt-4">{message}{token && <><p className="mt-2 text-xs">Local development token:</p><code className="mt-1 block break-all text-xs">{token}</code></>}</div>}<Link className="mt-5 block text-sm text-cyan-300" to="/login">Back to sign in</Link></AuthShell> }
