@@ -16,6 +16,10 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
+  servlet:
+    multipart:
+      max-file-size: ${RESUME_MAX_FILE_SIZE_MB:5}MB
+      max-request-size: ${RESUME_MAX_FILE_SIZE_MB:5}MB
 
 server:
   port: ${PORT:8080}
@@ -39,6 +43,9 @@ careerpilot:
   password-reset:
     expiration: ${PASSWORD_RESET_EXPIRATION:PT30M}
     expose-local-token: false
+  resume:
+    storage-path: ${RESUME_STORAGE_PATH:./runtime/resumes}
+    max-file-size-mb: ${RESUME_MAX_FILE_SIZE_MB:5}
 
 logging:
   level:

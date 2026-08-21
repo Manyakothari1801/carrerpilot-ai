@@ -8,6 +8,8 @@ Thumbs.db
 .env.*
 !.env.example
 backend/target/
+backend/runtime/
+runtime/resumes/
 frontend/node_modules/
 frontend/dist/
 frontend/.vite/
