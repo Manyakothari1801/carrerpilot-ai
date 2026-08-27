@@ -1,6 +1,6 @@
 # CareerPilot AI
 
-CareerPilot AI is a modular career-intelligence and assessment platform for students. Phase 3 adds private PDF/DOCX resume storage, deterministic parsing, active-resume management, and a protected Resume Manager.
+CareerPilot AI is a modular career-intelligence and assessment platform for students. Phase 4 adds versioned deterministic ATS heuristics, immutable analysis history, and optional schema-validated Gemini writing feedback.
 
 ## Technology
 
@@ -17,6 +17,8 @@ The application is a modular monolith. Backend modules share one deployment and 
 Security and browser-storage decisions are documented in [authentication security](docs/security/authentication.md). PWA verification steps are in [PWA testing](docs/frontend/pwa.md).
 
 Resume storage and privacy behavior are documented in [resume storage](docs/architecture/resume-storage.md) and [resume data privacy](docs/privacy/resume-data.md).
+
+The explainable scoring formula and AI failure behavior are documented in [resume analysis](docs/architecture/resume-analysis.md).
 
 Prerequisites: Java 21, Docker, and Node.js 20 or newer.
 

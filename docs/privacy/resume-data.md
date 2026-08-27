@@ -1,6 +1,8 @@
 # Resume data privacy and retention
 
-Phase 3 processes resumes entirely inside the CareerPilot backend. No resume file, extracted text, metadata, or contact information is sent to Gemini or any other third-party AI provider.
+Upload and deterministic parsing/scoring occur entirely inside the CareerPilot backend. No content is sent to an AI provider during upload, parsing, or rule-based scoring.
+
+When `AI_ENABLED=true` and a Gemini key is configured, creating an analysis sends only bounded parsed non-contact resume sections required for writing feedback to Gemini. Internal IDs, account details, storage paths, files, checksums, and contact sections are excluded. AI may be disabled without affecting deterministic analysis. Provider prompts, API keys, full resume text, raw provider payloads, and provider error bodies are not logged or persisted. The API key is supplied only to the backend through the `x-goog-api-key` request header and is never returned to the browser.
 
 In the local profile, original files are stored under `RESUME_STORAGE_PATH` (default `backend/runtime/resumes` when the backend is started from its directory). Generated UUID object keys are used as filenames; the user-supplied filename is metadata only. The directory is ignored by Git. Database records store metadata and deterministic parsed sections, never an absolute filesystem path.
 

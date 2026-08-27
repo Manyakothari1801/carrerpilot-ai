@@ -46,6 +46,29 @@ careerpilot:
   resume:
     storage-path: ${RESUME_STORAGE_PATH:./runtime/resumes}
     max-file-size-mb: ${RESUME_MAX_FILE_SIZE_MB:5}
+  analysis:
+    scoring-version: ats-rules-v1
+    prompt-version: resume-analysis-v1
+    max-ai-input-characters: ${AI_MAX_INPUT_CHARACTERS:30000}
+    strong-action-verbs: developed,designed,implemented,built,optimized,automated,led,improved,integrated,deployed,created,delivered,engineered,launched,reduced,increased,managed,architected,streamlined,mentored
+    weights:
+      ats-section: 30
+      ats-keyword: 20
+      ats-action-verb: 20
+      ats-quantification: 15
+      ats-readability: 15
+      overall-ats: 40
+      overall-section: 20
+      overall-keyword: 10
+      overall-action-verb: 10
+      overall-quantification: 10
+      overall-readability: 10
+  ai:
+    enabled: ${AI_ENABLED:false}
+    gemini-api-key: ${GEMINI_API_KEY:}
+    gemini-model: ${GEMINI_MODEL:gemini-3.6-flash}
+    connect-timeout: ${AI_CONNECT_TIMEOUT:PT5S}
+    request-timeout: ${AI_REQUEST_TIMEOUT:PT30S}
 
 logging:
   level:

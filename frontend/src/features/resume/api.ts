@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { api } from '../../services/api'
-import type { ResumeDetail, ResumeSummary } from './types'
+import type { AnalysisDetail, AnalysisSummary, ResumeDetail, ResumeSummary } from './types'
 
 export const resumeKeys={all:['resumes'] as const,detail:(id:string)=>['resumes',id] as const}
 export function useResumes(){return useQuery({queryKey:resumeKeys.all,queryFn:async()=>(await api.get<ResumeSummary[]>('/resumes')).data})}
@@ -9,3 +9,7 @@ export function useUploadResume(){const client=useQueryClient();return useMutati
 export function useActivateResume(){const client=useQueryClient();return useMutation({mutationFn:async(id:string)=>(await api.patch<ResumeDetail>(`/resumes/${id}/active`)).data,onSuccess:async()=>{await client.invalidateQueries({queryKey:resumeKeys.all});await client.invalidateQueries({queryKey:['resumes'],exact:false})}})}
 export function useDeleteResume(){const client=useQueryClient();return useMutation({mutationFn:async(id:string)=>api.delete(`/resumes/${id}`),onSuccess:async()=>{await client.invalidateQueries({queryKey:resumeKeys.all})}})}
 export async function downloadResume(resume:ResumeSummary){const response=await api.get(`/resumes/${resume.id}/download`,{responseType:'blob'});const url=URL.createObjectURL(response.data);const anchor=document.createElement('a');anchor.href=url;anchor.download=resume.originalFilename;anchor.click();URL.revokeObjectURL(url)}
+export function useCreateAnalysis(){const client=useQueryClient();return useMutation({mutationFn:async(resumeId:string)=>(await api.post<AnalysisDetail>(`/resumes/${resumeId}/analyses`)).data,onSuccess:async data=>{client.setQueryData(['resume-analysis',data.resumeId,data.id],data);await Promise.all([client.invalidateQueries({queryKey:['resume-analyses',data.resumeId]}),client.invalidateQueries({queryKey:['latest-active-analysis']})])}})}
+export function useAnalysisHistory(resumeId?:string){return useQuery({queryKey:['resume-analyses',resumeId],enabled:Boolean(resumeId),queryFn:async()=>(await api.get<AnalysisSummary[]>(`/resumes/${resumeId}/analyses`)).data})}
+export function useAnalysis(resumeId?:string,analysisId?:string){return useQuery({queryKey:['resume-analysis',resumeId,analysisId],enabled:Boolean(resumeId&&analysisId),queryFn:async()=>(await api.get<AnalysisDetail>(`/resumes/${resumeId}/analyses/${analysisId}`)).data})}
+export function useLatestActiveAnalysis(){return useQuery({queryKey:['latest-active-analysis'],queryFn:async()=>{const response=await api.get<AnalysisSummary|''>('/resume-analyses/latest-active');return response.data||null}})}

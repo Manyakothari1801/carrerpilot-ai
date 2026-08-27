@@ -10,6 +10,7 @@ Thumbs.db
 backend/target/
 backend/runtime/
 runtime/resumes/
+.data/
 frontend/node_modules/
 frontend/dist/
 frontend/.vite/
