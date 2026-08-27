@@ -1,0 +1,1 @@
+package com.careerpilot.modules.jobmatch.scoring;import com.careerpilot.modules.jobmatch.entity.SkillImportance;public record ExtractedSkill(String normalized,String display,SkillImportance importance,int frequency,String source){}

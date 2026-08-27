@@ -9,6 +9,8 @@ import com.careerpilot.config.PasswordResetProperties;
 import com.careerpilot.config.ResumeProperties;
 import com.careerpilot.config.AnalysisProperties;
 import com.careerpilot.config.AiProperties;
+import com.careerpilot.config.JobMatchProperties;
+import com.careerpilot.config.EmbeddingProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -28,7 +30,7 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
-@EnableConfigurationProperties({CorsProperties.class, SecurityProperties.class, PasswordResetProperties.class, ResumeProperties.class, AnalysisProperties.class, AiProperties.class})
+@EnableConfigurationProperties({CorsProperties.class, SecurityProperties.class, PasswordResetProperties.class, ResumeProperties.class, AnalysisProperties.class, AiProperties.class, JobMatchProperties.class, EmbeddingProperties.class})
 public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http, ObjectMapper objectMapper, JwtAuthenticationFilter jwtFilter) throws Exception {
@@ -42,6 +44,7 @@ public class SecurityConfig {
                         .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/v1/resumes/**").hasRole("STUDENT")
                         .requestMatchers("/api/v1/resume-analyses/**").hasRole("STUDENT")
+                        .requestMatchers("/api/v1/job-matches/**").hasRole("STUDENT")
                         .anyRequest().authenticated())
                 .httpBasic(httpBasic -> httpBasic.disable())
                 .formLogin(form -> form.disable())

@@ -1,0 +1,1 @@
+package com.careerpilot.modules.jobmatch.dto;import com.careerpilot.modules.jobmatch.entity.*;public record JobMatchSkillResponse(String skill,String normalizedSkill,MatchStatus status,SkillImportance importance,SkillPriority priority,String source,String evidence,String recommendation){}

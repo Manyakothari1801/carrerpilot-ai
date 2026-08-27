@@ -10,6 +10,8 @@ import { AdminPage } from './pages/AdminPage'
 import { ResumesPage } from './pages/ResumesPage'
 import { ResumeDetailPage } from './pages/ResumeDetailPage'
 import { ResumeAnalysisPage } from './pages/ResumeAnalysisPage'
+import { JobMatchPage } from './pages/JobMatchPage'
+import { JobMatchResultPage } from './pages/JobMatchResultPage'
 
 export default function App() {
   return <Routes>
@@ -17,8 +19,9 @@ export default function App() {
     <Route path="/register" element={<AuthPage mode="register" />} />
     <Route path="/forgot-password" element={<ForgotPasswordPage />} />
     <Route path="/reset-password" element={<ResetPasswordPage />} />
-    <Route element={<ProtectedRoute role="STUDENT" />}><Route path="/student" element={<StudentLayout />}><Route path="dashboard" element={<DashboardPage />} /><Route path="profile" element={<ProfilePage />} /><Route path="resumes" element={<ResumesPage />} /><Route path="resumes/:id" element={<ResumeDetailPage />} /><Route path="resumes/:resumeId/analysis/:analysisId" element={<ResumeAnalysisPage />} /></Route></Route>
+    <Route element={<ProtectedRoute role="STUDENT" />}><Route path="/student" element={<StudentLayout />}><Route path="dashboard" element={<DashboardPage />} /><Route path="profile" element={<ProfilePage />} /><Route path="resumes" element={<ResumesPage />} /><Route path="resumes/:id" element={<ResumeDetailPage />} /><Route path="resumes/:resumeId/analysis/:analysisId" element={<ResumeAnalysisPage />} /><Route path="job-match" element={<JobMatchPage />} /><Route path="job-match/:id" element={<JobMatchResultPage />} /></Route></Route>
     <Route path="/resumes" element={<Navigate to="/student/resumes" replace />} />
+    <Route path="/job-match" element={<Navigate to="/student/job-match" replace />} />
     <Route element={<ProtectedRoute role="ADMIN" />}><Route path="/admin" element={<AdminPage />} /></Route>
     <Route path="*" element={<Navigate to="/student/dashboard" replace />} />
   </Routes>

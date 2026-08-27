@@ -1,0 +1,1 @@
+package com.careerpilot.modules.jobmatch.dto;import jakarta.validation.constraints.*;import java.util.UUID;public record CreateJobMatchRequest(@NotNull UUID resumeId,@NotBlank @Size(max=160)String jobTitle,@Size(max=160)String companyName,@NotBlank @Size(min=100,max=50000)String jobDescription){}

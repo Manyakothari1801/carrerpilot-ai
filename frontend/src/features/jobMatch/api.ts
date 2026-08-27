@@ -1,0 +1,6 @@
+import{useMutation,useQuery,useQueryClient}from'@tanstack/react-query';import{api}from'../../services/api';import type{CreateJobMatch,JobMatchDetail,JobMatchSummary}from'./types';
+export const jobMatchKeys={all:['job-matches']as const,detail:(id:string)=>['job-match',id]as const,latest:['job-match-latest']as const};
+export function useJobMatches(){return useQuery({queryKey:jobMatchKeys.all,queryFn:async()=>(await api.get<JobMatchSummary[]>('/job-matches')).data})}
+export function useJobMatch(id?:string){return useQuery({queryKey:jobMatchKeys.detail(id??''),enabled:Boolean(id),queryFn:async()=>(await api.get<JobMatchDetail>(`/job-matches/${id}`)).data})}
+export function useLatestJobMatch(){return useQuery({queryKey:jobMatchKeys.latest,queryFn:async()=>{const response=await api.get<JobMatchSummary|''>('/job-matches/latest');return response.data||null}})}
+export function useCreateJobMatch(){const client=useQueryClient();return useMutation({mutationFn:async(value:CreateJobMatch)=>(await api.post<JobMatchDetail>('/job-matches',value,{timeout:60_000})).data,onSuccess:async data=>{client.setQueryData(jobMatchKeys.detail(data.id),data);await Promise.all([client.invalidateQueries({queryKey:jobMatchKeys.all}),client.invalidateQueries({queryKey:jobMatchKeys.latest})])}})}

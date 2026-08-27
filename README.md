@@ -59,4 +59,4 @@ CareerPilot AI will process resumes and, in later phases, proctoring event data.
 
 ## Current scope
 
-Phase 1 provides infrastructure, configuration, documentation, a secured API foundation, and a clean frontend shell. Authentication and all career-related business features are intentionally deferred.
+Phases 1–5 provide authentication, student profiles, PWA support, resume management and parsing, deterministic ATS analysis, resilient Gemini writing feedback, and authenticated resume-to-job matching. Job matching is deterministic by default and preserves historical results. See the [job matching architecture](docs/architecture/job-matching.md) and [job matching privacy notes](docs/privacy/job-matching.md).

@@ -1,0 +1,1 @@
+package com.careerpilot.modules.jobmatch.dto;import java.time.Instant;import java.util.UUID;public record JobMatchSummaryResponse(UUID id,UUID resumeId,String jobTitle,String companyName,int overallMatchScore,Instant createdAt){}

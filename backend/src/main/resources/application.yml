@@ -69,6 +69,20 @@ careerpilot:
     gemini-model: ${GEMINI_MODEL:gemini-3.6-flash}
     connect-timeout: ${AI_CONNECT_TIMEOUT:PT5S}
     request-timeout: ${AI_REQUEST_TIMEOUT:PT30S}
+  job-match:
+    scoring-version: job-match-rules-v1
+    min-description-characters: 100
+    max-description-characters: 50000
+    weights:
+      skill: 40
+      keyword: 20
+      semantic: 25
+      experience: 10
+      education: 5
+  embedding:
+    enabled: ${EMBEDDING_ENABLED:false}
+    provider: ${EMBEDDING_PROVIDER:UNAVAILABLE}
+    model: ${EMBEDDING_MODEL:}
 
 logging:
   level:

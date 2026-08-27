@@ -43,3 +43,31 @@ erDiagram
 
 Each future phase owns its Flyway migration. Hibernate remains in `validate` mode and never mutates production schemas.
 
+## Phase 5 job matching
+
+```mermaid
+erDiagram
+  USERS ||--o{ JOB_MATCHES : owns
+  RESUMES ||--o{ JOB_MATCHES : evaluated_for
+  JOB_MATCHES ||--o{ JOB_MATCH_SKILLS : records
+  JOB_MATCHES {
+    uuid id PK
+    uuid user_id FK
+    uuid resume_id FK
+    string job_title
+    int overall_match_score
+    int keyword_match_score
+    int skill_match_score
+    int semantic_match_score "nullable"
+    string scoring_version
+    timestamptz created_at
+  }
+  JOB_MATCH_SKILLS {
+    uuid id PK
+    uuid job_match_id FK
+    string normalized_skill_name
+    string match_status
+    string importance
+    string priority
+  }
+```
