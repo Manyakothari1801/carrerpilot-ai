@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${DB_URL:jdbc:postgresql://localhost:5432/careerpilot}
+    url: ${DB_URL:jdbc:postgresql://localhost:5433/careerpilot}
     username: ${DB_USERNAME:careerpilot}
     password: ${DB_PASSWORD:careerpilot_local}
   jpa.show-sql: false

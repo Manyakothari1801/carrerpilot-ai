@@ -1,0 +1,1 @@
+package com.careerpilot.modules.scheduling.dto;import jakarta.validation.constraints.NotNull;import java.time.Instant;import java.util.UUID;public record CreateScheduledExamRequest(@NotNull UUID assessmentId,@NotNull Instant scheduledStart){}

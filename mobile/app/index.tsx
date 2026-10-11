@@ -1,0 +1,1 @@
+import{Redirect}from'expo-router';import{useAuth}from'@/src/auth/AuthContext';import{useOnboarding}from'@/src/onboarding/OnboardingContext';export default function Index(){const{user}=useAuth(),{complete}=useOnboarding();return <Redirect href={(user?'/(tabs)':complete?'/(auth)/login':'/onboarding')as never}/>}

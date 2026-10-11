@@ -1,0 +1,1 @@
+package com.careerpilot.modules.scheduling.dto;import java.time.Instant;import java.util.UUID;public record CandidateAssignmentResponse(UUID id,UUID candidateId,String candidateName,String candidateEmail,String status,UUID attemptId,Instant assignedAt,Instant startedAt,Instant completedAt){}

@@ -1,0 +1,3 @@
+import{api}from'@/src/api/client';
+import type{CareerRecommendationDetail,CareerRecommendationReadiness,CareerRecommendationSummary}from'./careerRecommendationTypes';
+export const careerRecommendationService={readiness:async()=>(await api.get<CareerRecommendationReadiness>('/career-recommendations/readiness')).data,history:async()=>(await api.get<CareerRecommendationSummary[]>('/career-recommendations')).data,get:async(id:string)=>(await api.get<CareerRecommendationDetail>(`/career-recommendations/${id}`)).data,create:async()=>(await api.post<CareerRecommendationDetail>('/career-recommendations',undefined,{timeout:20_000})).data};

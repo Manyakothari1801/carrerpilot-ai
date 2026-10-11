@@ -1,0 +1,3 @@
+import * as SecureStore from'expo-secure-store';import type{AuthResponse,UserSummary}from'@/src/types/auth';
+const KEY='career_guidance_ai_session';
+export const secureSession={async get():Promise<AuthResponse|null>{try{const value=await SecureStore.getItemAsync(KEY);return value?JSON.parse(value)as AuthResponse:null}catch{await SecureStore.deleteItemAsync(KEY);return null}},set:(value:AuthResponse)=>SecureStore.setItemAsync(KEY,JSON.stringify(value)),clear:()=>SecureStore.deleteItemAsync(KEY),async updateUser(user:UserSummary){const value=await this.get();if(value)await this.set({...value,user})}};

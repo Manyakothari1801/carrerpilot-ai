@@ -1,8 +1,13 @@
 import axios from 'axios'
 import { tokenStore } from '../features/auth/tokenStore'
 
+const configuredBaseUrl = import.meta.env.VITE_API_BASE_URL?.trim()
+if (!configuredBaseUrl) {
+  throw new Error('VITE_API_BASE_URL is required. Configure the public backend API URL before starting the web app.')
+}
+
 export const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:8080/api/v1',
+  baseURL: configuredBaseUrl.replace(/\/+$/, ''),
   headers: { 'Content-Type': 'application/json' },
   timeout: 15_000,
 })

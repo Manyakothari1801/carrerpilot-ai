@@ -1,0 +1,4 @@
+export const humanize=(value:string)=>value.replaceAll('_',' ').toLowerCase().replace(/^./,letter=>letter.toUpperCase());
+export const formatDateTime=(value:string)=>new Intl.DateTimeFormat(undefined,{dateStyle:'medium',timeStyle:'short'}).format(new Date(value));
+export const localDateParts=(value?:string)=>{const date=value?new Date(value):new Date(Date.now()+24*60*60*1000);const two=(n:number)=>String(n).padStart(2,'0');return{date:`${date.getFullYear()}-${two(date.getMonth()+1)}-${two(date.getDate())}`,time:`${two(date.getHours())}:${two(date.getMinutes())}`}};
+export function toFutureInstant(date:string,time:string){if(!/^\d{4}-\d{2}-\d{2}$/.test(date)||!/^\d{2}:\d{2}$/.test(time))return null;const value=new Date(`${date}T${time}:00`);return Number.isNaN(value.getTime())||value.getTime()<=Date.now()?null:value.toISOString()}

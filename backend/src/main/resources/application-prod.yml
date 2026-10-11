@@ -1,0 +1,24 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+
+server:
+  forward-headers-strategy: framework
+
+springdoc:
+  api-docs:
+    enabled: ${SWAGGER_ENABLED:false}
+  swagger-ui:
+    enabled: ${SWAGGER_ENABLED:false}
+
+careerpilot:
+  cors:
+    allowed-origins: ${FRONTEND_ORIGIN}
+  password-reset:
+    expose-local-token: false
+  career-recommendation:
+    service-url: ${ML_SERVICE_URL}
+  mail:
+    frontend-url: ${APP_FRONTEND_URL}

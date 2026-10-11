@@ -1,0 +1,1 @@
+package com.careerpilot.modules.scheduling.repository;import com.careerpilot.modules.scheduling.entity.ScheduledExamRescheduleHistory;import org.springframework.data.jpa.repository.JpaRepository;import java.util.UUID;public interface ScheduledExamRescheduleHistoryRepository extends JpaRepository<ScheduledExamRescheduleHistory,UUID>{long countByScheduledExamId(UUID id);}

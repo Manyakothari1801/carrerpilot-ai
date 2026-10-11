@@ -10,7 +10,9 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 RUN addgroup -S careerpilot && adduser -S careerpilot -G careerpilot
 COPY --from=build /workspace/target/*.jar app.jar
+RUN mkdir -p /app/runtime/resumes && chown -R careerpilot:careerpilot /app
 USER careerpilot
-EXPOSE 8080
+VOLUME ["/app/runtime/resumes"]
+EXPOSE 8081
 ENTRYPOINT ["java", "-jar", "/app/app.jar"]
 

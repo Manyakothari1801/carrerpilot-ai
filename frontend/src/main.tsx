@@ -6,6 +6,8 @@ import App from './App'
 import { AuthProvider } from './features/auth/AuthContext'
 import { registerSW } from 'virtual:pwa-register'
 import './styles.css'
+import { ThemeProvider } from './components/ThemeProvider'
+import { FeedbackProvider } from './components/FeedbackProvider'
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { staleTime: 30_000, retry: 1 } },
@@ -16,9 +18,13 @@ registerSW({ immediate: true })
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
-      <BrowserRouter>
-        <AuthProvider><App /></AuthProvider>
-      </BrowserRouter>
+      <ThemeProvider>
+        <FeedbackProvider>
+          <BrowserRouter>
+            <AuthProvider><App /></AuthProvider>
+          </BrowserRouter>
+        </FeedbackProvider>
+      </ThemeProvider>
     </QueryClientProvider>
   </StrictMode>,
 )

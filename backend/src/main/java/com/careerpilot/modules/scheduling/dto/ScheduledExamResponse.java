@@ -1,0 +1,1 @@
+package com.careerpilot.modules.scheduling.dto;import java.time.Instant;import java.util.UUID;public record ScheduledExamResponse(UUID id,UUID assessmentId,String assessmentTitle,String title,String instructions,Instant scheduledStart,Instant scheduledEnd,String status,int durationMinutes,int totalQuestions,int passingPercentage,int assignedCandidateCount){}

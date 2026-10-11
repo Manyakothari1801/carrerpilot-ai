@@ -11,9 +11,12 @@ import com.careerpilot.config.AnalysisProperties;
 import com.careerpilot.config.AiProperties;
 import com.careerpilot.config.JobMatchProperties;
 import com.careerpilot.config.EmbeddingProperties;
+import com.careerpilot.config.AssessmentProperties;
+import com.careerpilot.config.CareerRecommendationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -30,7 +33,7 @@ import java.util.List;
 import java.util.Map;
 
 @Configuration
-@EnableConfigurationProperties({CorsProperties.class, SecurityProperties.class, PasswordResetProperties.class, ResumeProperties.class, AnalysisProperties.class, AiProperties.class, JobMatchProperties.class, EmbeddingProperties.class})
+@EnableConfigurationProperties({CorsProperties.class, SecurityProperties.class, PasswordResetProperties.class, ResumeProperties.class, AnalysisProperties.class, AiProperties.class, JobMatchProperties.class, EmbeddingProperties.class, AssessmentProperties.class, CareerRecommendationProperties.class})
 public class SecurityConfig {
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http, ObjectMapper objectMapper, JwtAuthenticationFilter jwtFilter) throws Exception {
@@ -42,9 +45,15 @@ public class SecurityConfig {
                         .requestMatchers("/actuator/health", "/actuator/health/**", "/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/api/v1/auth/register", "/api/v1/auth/login", "/api/v1/auth/refresh", "/api/v1/auth/forgot-password", "/api/v1/auth/reset-password").permitAll()
                         .requestMatchers("/api/v1/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/api/v1/student/scheduled-exams/**").hasRole("STUDENT")
+                        .requestMatchers("/api/v1/scheduled-exams/**").denyAll()
+                        .requestMatchers(HttpMethod.GET,"/api/v1/assessments","/api/v1/assessments/*").hasAnyRole("STUDENT","ADMIN")
                         .requestMatchers("/api/v1/resumes/**").hasRole("STUDENT")
                         .requestMatchers("/api/v1/resume-analyses/**").hasRole("STUDENT")
                         .requestMatchers("/api/v1/job-matches/**").hasRole("STUDENT")
+                        .requestMatchers("/api/v1/career-recommendations/**").hasRole("STUDENT")
+                        .requestMatchers("/api/v1/career-plans/**").hasRole("STUDENT")
+                        .requestMatchers("/api/v1/assessments/**", "/api/v1/assessment-attempts/**").hasRole("STUDENT")
                         .anyRequest().authenticated())
                 .httpBasic(httpBasic -> httpBasic.disable())
                 .formLogin(form -> form.disable())

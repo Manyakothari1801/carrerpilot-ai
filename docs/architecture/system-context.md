@@ -1,6 +1,6 @@
 # System context
 
-CareerPilot AI uses a modular-monolith architecture: one React client, one Spring Boot API, and one PostgreSQL database. Domain boundaries remain explicit so individual modules can be extracted later if operational scale warrants it.
+The official project, **Intelligent Career Guidance and Resume Optimization Platform Using AI**, uses the user-facing brand **Career Guidance AI**. It follows a modular-monolith architecture: one React client, one Spring Boot API, and one PostgreSQL database. Domain boundaries remain explicit so individual modules can be extracted later if operational scale warrants it.
 
 ```mermaid
 flowchart LR
@@ -11,6 +11,7 @@ flowchart LR
     API --> Store[Object storage]
     API --> AI[Gemini and embedding provider]
     API --> Mail[Transactional email provider]
+    API --> ML[Private FastAPI career model]
     Scheduler[Spring Scheduler] --> API
 ```
 
@@ -34,5 +35,4 @@ Frontend features will live under `src/features`, with shared UI, layouts, hooks
 - S3-compatible storage will hold durable resumes and generated reports.
 - Secrets are injected by the deployment platform.
 
-The backend must not rely on its local filesystem for durable data.
-
+The backend must not rely on its local filesystem for durable data. The mobile client calls only Spring Boot; the private FastAPI service is reached through the backend using `ML_SERVICE_URL`.

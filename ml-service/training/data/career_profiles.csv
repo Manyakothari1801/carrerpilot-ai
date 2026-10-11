@@ -1,0 +1,241 @@
+degree,experience_level,target_role,skills,career
+MCA,ENTRY_LEVEL,cloud engineer,Linux|BEGINNER;Python|INTERMEDIATE;Git|INTERMEDIATE;CI/CD|BEGINNER;Terraform|BEGINNER;Kubernetes|ADVANCED;Docker|BEGINNER,Cloud DevOps Engineer
+B.Tech Computer Science,ENTRY_LEVEL,security analyst,Network Security|ADVANCED;Firewalls|ADVANCED;Python|BEGINNER;Risk Assessment|INTERMEDIATE;Linux|INTERMEDIATE;Cryptography|INTERMEDIATE,Cybersecurity Analyst
+B.Tech Computer Science,ENTRY_LEVEL,qa automation engineer,Git|ADVANCED;Selenium|ADVANCED;CI/CD|BEGINNER;JUnit|INTERMEDIATE;Test Automation|ADVANCED;SQL|BEGINNER;API Testing|INTERMEDIATE,QA Automation Engineer
+BBA Analytics,ENTRY_LEVEL,business intelligence analyst,Pandas|ADVANCED;SQL|ADVANCED;Excel|BEGINNER;Power BI|INTERMEDIATE;Data Visualization|BEGINNER;Tableau|INTERMEDIATE;Statistics|BEGINNER,Data Analyst
+B.Tech Computer Science,JUNIOR,quality engineer,JUnit|ADVANCED;API Testing|INTERMEDIATE;Git|INTERMEDIATE;Test Automation|INTERMEDIATE;Selenium|INTERMEDIATE,QA Automation Engineer
+B.Sc Information Technology,JUNIOR,quality engineer,SQL|ADVANCED;Test Automation|INTERMEDIATE;JUnit|ADVANCED;CI/CD|ADVANCED;Selenium|BEGINNER,QA Automation Engineer
+B.Sc Statistics,JUNIOR,business intelligence analyst,SQL|INTERMEDIATE;Data Visualization|ADVANCED;Power BI|ADVANCED;Excel|BEGINNER;Python|INTERMEDIATE;Tableau|INTERMEDIATE,Data Analyst
+B.Tech Computer Science,JUNIOR,applied scientist,Machine Learning|ADVANCED;Python|INTERMEDIATE;NumPy|INTERMEDIATE;Scikit-learn|ADVANCED;Statistics|INTERMEDIATE,Data Scientist
+B.Tech Computer Science,JUNIOR,qa automation engineer,Test Automation|INTERMEDIATE;Java|INTERMEDIATE;Git|INTERMEDIATE;CI/CD|BEGINNER;JUnit|ADVANCED,QA Automation Engineer
+B.Tech Computer Science,JUNIOR,frontend developer,Vite|BEGINNER;Git|INTERMEDIATE;React|BEGINNER;CSS|INTERMEDIATE;HTML|INTERMEDIATE;REST APIs|ADVANCED,Frontend Developer
+B.Tech Computer Science,STUDENT,software test engineer,CI/CD|ADVANCED;Test Automation|ADVANCED;Selenium|ADVANCED;Git|ADVANCED;API Testing|BEGINNER;Java|ADVANCED,QA Automation Engineer
+B.Tech Computer Science,STUDENT,machine learning engineer,Scikit-learn|BEGINNER;NumPy|BEGINNER;Statistics|BEGINNER;Python|INTERMEDIATE;Pandas|ADVANCED;Machine Learning|ADVANCED;SQL|ADVANCED,Data Scientist
+MCA,STUDENT,java developer,Spring Boot|BEGINNER;Docker|ADVANCED;REST APIs|BEGINNER;Microservices|INTERMEDIATE,Backend Developer
+M.Sc Statistics,STUDENT,applied scientist,Machine Learning|BEGINNER;Statistics|BEGINNER;Data Visualization|ADVANCED;NumPy|INTERMEDIATE,Data Scientist
+B.Tech Computer Science,ENTRY_LEVEL,backend developer,Microservices|BEGINNER;REST APIs|INTERMEDIATE;PostgreSQL|ADVANCED;Java|BEGINNER,Backend Developer
+BCA,ENTRY_LEVEL,frontend developer,TypeScript|INTERMEDIATE;HTML|INTERMEDIATE;REST APIs|BEGINNER;JavaScript|INTERMEDIATE,Frontend Developer
+B.Tech Computer Science,ENTRY_LEVEL,applied scientist,Scikit-learn|INTERMEDIATE;NumPy|ADVANCED;Pandas|INTERMEDIATE;Data Visualization|INTERMEDIATE;Machine Learning|INTERMEDIATE;SQL|ADVANCED,Data Scientist
+B.Tech Computer Science,JUNIOR,quality engineer,JUnit|BEGINNER;Java|BEGINNER;Git|BEGINNER;SQL|BEGINNER;Selenium|BEGINNER;Test Automation|BEGINNER;CI/CD|ADVANCED,QA Automation Engineer
+M.Sc Statistics,JUNIOR,machine learning engineer,NumPy|BEGINNER;Python|INTERMEDIATE;Scikit-learn|ADVANCED;SQL|INTERMEDIATE;Data Visualization|BEGINNER;Machine Learning|INTERMEDIATE,Data Scientist
+B.Sc Information Technology,ENTRY_LEVEL,soc analyst,SIEM|BEGINNER;Firewalls|INTERMEDIATE;Cryptography|INTERMEDIATE;Incident Response|ADVANCED;Risk Assessment|INTERMEDIATE;Python|INTERMEDIATE;Network Security|ADVANCED,Cybersecurity Analyst
+B.Tech Computer Science,JUNIOR,quality engineer,SQL|ADVANCED;JUnit|ADVANCED;API Testing|INTERMEDIATE;Git|ADVANCED;CI/CD|ADVANCED,QA Automation Engineer
+B.Tech Information Technology,STUDENT,systems analyst,Business Process|ADVANCED;Requirements Analysis|BEGINNER;Stakeholder Management|BEGINNER;SQL|ADVANCED,Business Analyst
+B.Sc Information Technology,STUDENT,security analyst,Risk Assessment|BEGINNER;SIEM|BEGINNER;Cryptography|BEGINNER;Python|INTERMEDIATE,Cybersecurity Analyst
+MCA,STUDENT,backend developer,Microservices|ADVANCED;Spring Boot|INTERMEDIATE;Maven|BEGINNER;PostgreSQL|INTERMEDIATE,Backend Developer
+B.Tech Computer Science,ENTRY_LEVEL,frontend developer,React|ADVANCED;Git|INTERMEDIATE;REST APIs|ADVANCED;HTML|ADVANCED;TypeScript|BEGINNER,Frontend Developer
+BCA,ENTRY_LEVEL,web developer,JavaScript|ADVANCED;TypeScript|BEGINNER;REST APIs|BEGINNER;CSS|BEGINNER;React|BEGINNER;HTML|INTERMEDIATE,Frontend Developer
+B.Tech Computer Science,STUDENT,soc analyst,Risk Assessment|ADVANCED;Python|INTERMEDIATE;Linux|ADVANCED;Incident Response|ADVANCED;SIEM|ADVANCED;Cryptography|BEGINNER,Cybersecurity Analyst
+B.Sc Information Technology,JUNIOR,security analyst,Python|INTERMEDIATE;Firewalls|INTERMEDIATE;Linux|ADVANCED;Cryptography|ADVANCED;SIEM|ADVANCED,Cybersecurity Analyst
+BCA,ENTRY_LEVEL,react developer,REST APIs|ADVANCED;Git|BEGINNER;HTML|ADVANCED;JavaScript|ADVANCED;TypeScript|ADVANCED;Vite|BEGINNER,Frontend Developer
+B.Tech Computer Science,ENTRY_LEVEL,soc analyst,SIEM|BEGINNER;Risk Assessment|BEGINNER;Network Security|INTERMEDIATE;Cryptography|ADVANCED;Incident Response|BEGINNER;Python|BEGINNER;Firewalls|INTERMEDIATE,Cybersecurity Analyst
+MBA,ENTRY_LEVEL,product analyst,Communication|ADVANCED;Agile|ADVANCED;Requirements Analysis|BEGINNER;SQL|ADVANCED;Power BI|ADVANCED,Business Analyst
+B.Tech Computer Science,ENTRY_LEVEL,frontend developer,REST APIs|ADVANCED;Git|BEGINNER;HTML|INTERMEDIATE;CSS|INTERMEDIATE;JavaScript|INTERMEDIATE,Frontend Developer
+B.Sc Information Technology,STUDENT,security analyst,Network Security|INTERMEDIATE;Python|ADVANCED;Incident Response|BEGINNER;Risk Assessment|INTERMEDIATE;Linux|BEGINNER,Cybersecurity Analyst
+B.Tech Computer Science,STUDENT,reporting analyst,Pandas|BEGINNER;Statistics|BEGINNER;Tableau|ADVANCED;Python|BEGINNER;Power BI|ADVANCED;Excel|BEGINNER;SQL|BEGINNER,Data Analyst
+BCA,ENTRY_LEVEL,api engineer,Microservices|BEGINNER;Maven|ADVANCED;Git|INTERMEDIATE;Spring Boot|INTERMEDIATE;Java|INTERMEDIATE;Docker|ADVANCED,Backend Developer
+B.Sc Information Technology,ENTRY_LEVEL,qa automation engineer,Java|ADVANCED;Selenium|ADVANCED;CI/CD|ADVANCED;JUnit|ADVANCED;API Testing|INTERMEDIATE;Test Automation|INTERMEDIATE;SQL|ADVANCED,QA Automation Engineer
+B.Sc Information Technology,STUDENT,cybersecurity analyst,Incident Response|ADVANCED;Cryptography|INTERMEDIATE;Linux|INTERMEDIATE;SIEM|BEGINNER;Network Security|ADVANCED,Cybersecurity Analyst
+MCA,JUNIOR,site reliability engineer,AWS|INTERMEDIATE;CI/CD|BEGINNER;Kubernetes|INTERMEDIATE;Docker|ADVANCED;Python|INTERMEDIATE,Cloud DevOps Engineer
+B.Sc Statistics,ENTRY_LEVEL,reporting analyst,Pandas|INTERMEDIATE;SQL|INTERMEDIATE;Tableau|BEGINNER;Data Visualization|INTERMEDIATE;Power BI|INTERMEDIATE,Data Analyst
+B.Tech Computer Science,ENTRY_LEVEL,soc analyst,Firewalls|BEGINNER;Python|ADVANCED;Risk Assessment|ADVANCED;Cryptography|INTERMEDIATE;Network Security|INTERMEDIATE;SIEM|ADVANCED;Incident Response|ADVANCED,Cybersecurity Analyst
+B.Tech Computer Science,ENTRY_LEVEL,applied scientist,NumPy|INTERMEDIATE;Machine Learning|ADVANCED;Pandas|BEGINNER;Statistics|BEGINNER;SQL|BEGINNER,Data Scientist
+BBA Analytics,JUNIOR,business intelligence analyst,SQL|BEGINNER;Python|ADVANCED;Statistics|INTERMEDIATE;Data Visualization|INTERMEDIATE;Pandas|BEGINNER,Data Analyst
+B.Sc Information Technology,JUNIOR,cybersecurity analyst,Risk Assessment|ADVANCED;Linux|BEGINNER;Python|ADVANCED;Network Security|INTERMEDIATE;Firewalls|ADVANCED,Cybersecurity Analyst
+MCA,JUNIOR,site reliability engineer,AWS|ADVANCED;Python|INTERMEDIATE;Terraform|INTERMEDIATE;Docker|ADVANCED,Cloud DevOps Engineer
+BCA,STUDENT,quality engineer,Java|INTERMEDIATE;Git|INTERMEDIATE;Selenium|ADVANCED;SQL|INTERMEDIATE,QA Automation Engineer
+BBA Analytics,ENTRY_LEVEL,reporting analyst,Power BI|INTERMEDIATE;Tableau|INTERMEDIATE;Statistics|ADVANCED;Pandas|BEGINNER;Python|BEGINNER;Excel|BEGINNER;SQL|ADVANCED,Data Analyst
+B.Sc Information Technology,JUNIOR,frontend developer,CSS|INTERMEDIATE;Git|ADVANCED;HTML|BEGINNER;TypeScript|ADVANCED;Vite|ADVANCED,Frontend Developer
+B.Sc Statistics,JUNIOR,reporting analyst,Excel|ADVANCED;Python|ADVANCED;Power BI|BEGINNER;Data Visualization|INTERMEDIATE;Statistics|BEGINNER;Tableau|INTERMEDIATE;Pandas|ADVANCED,Data Analyst
+BBA Analytics,STUDENT,reporting analyst,Statistics|INTERMEDIATE;Pandas|ADVANCED;SQL|INTERMEDIATE;Python|INTERMEDIATE;Tableau|BEGINNER,Data Analyst
+B.Tech Cybersecurity,ENTRY_LEVEL,soc analyst,Python|ADVANCED;Risk Assessment|INTERMEDIATE;SIEM|INTERMEDIATE;Network Security|BEGINNER;Firewalls|ADVANCED,Cybersecurity Analyst
+MBA,STUDENT,systems analyst,Excel|INTERMEDIATE;Stakeholder Management|BEGINNER;Agile|ADVANCED;Business Process|BEGINNER;SQL|BEGINNER;Power BI|ADVANCED,Business Analyst
+BCA,JUNIOR,frontend developer,HTML|INTERMEDIATE;TypeScript|BEGINNER;React|BEGINNER;REST APIs|INTERMEDIATE;Git|INTERMEDIATE,Frontend Developer
+MBA,JUNIOR,product analyst,SQL|ADVANCED;Excel|ADVANCED;Stakeholder Management|ADVANCED;Agile|INTERMEDIATE;Communication|INTERMEDIATE,Business Analyst
+B.Tech Computer Science,JUNIOR,cloud engineer,Python|ADVANCED;Terraform|ADVANCED;Linux|ADVANCED;Docker|INTERMEDIATE,Cloud DevOps Engineer
+B.Tech Computer Science,ENTRY_LEVEL,cybersecurity analyst,SIEM|BEGINNER;Network Security|ADVANCED;Linux|INTERMEDIATE;Firewalls|ADVANCED;Incident Response|ADVANCED,Cybersecurity Analyst
+B.Sc Statistics,STUDENT,data analyst,Tableau|ADVANCED;Excel|INTERMEDIATE;Data Visualization|BEGINNER;Pandas|INTERMEDIATE;Power BI|BEGINNER,Data Analyst
+MCA,STUDENT,cloud engineer,Git|INTERMEDIATE;CI/CD|BEGINNER;Docker|ADVANCED;Terraform|INTERMEDIATE;Linux|INTERMEDIATE;Python|INTERMEDIATE;Kubernetes|ADVANCED,Cloud DevOps Engineer
+M.Sc Statistics,JUNIOR,applied scientist,Scikit-learn|ADVANCED;Statistics|ADVANCED;Machine Learning|ADVANCED;NumPy|BEGINNER,Data Scientist
+B.Tech Computer Science,JUNIOR,api engineer,Microservices|BEGINNER;REST APIs|ADVANCED;Java|ADVANCED;Maven|BEGINNER,Backend Developer
+MCA,ENTRY_LEVEL,backend developer,REST APIs|BEGINNER;Maven|BEGINNER;Spring Boot|BEGINNER;Microservices|INTERMEDIATE;Docker|ADVANCED;Git|INTERMEDIATE,Backend Developer
+B.Tech Computer Science,JUNIOR,data scientist,Python|BEGINNER;Data Visualization|BEGINNER;Scikit-learn|BEGINNER;NumPy|ADVANCED;Pandas|ADVANCED;Machine Learning|ADVANCED,Data Scientist
+B.Tech Computer Science,STUDENT,devops engineer,Git|INTERMEDIATE;Python|INTERMEDIATE;CI/CD|BEGINNER;AWS|BEGINNER;Terraform|BEGINNER;Docker|INTERMEDIATE;Linux|BEGINNER,Cloud DevOps Engineer
+M.Sc Statistics,ENTRY_LEVEL,applied scientist,Data Visualization|BEGINNER;NumPy|ADVANCED;Python|INTERMEDIATE;Machine Learning|BEGINNER;Scikit-learn|INTERMEDIATE,Data Scientist
+B.Tech Computer Science,ENTRY_LEVEL,quality engineer,Selenium|ADVANCED;Test Automation|INTERMEDIATE;CI/CD|BEGINNER;JUnit|BEGINNER;Java|INTERMEDIATE,QA Automation Engineer
+BCA,ENTRY_LEVEL,qa automation engineer,JUnit|INTERMEDIATE;API Testing|BEGINNER;Selenium|INTERMEDIATE;Java|ADVANCED;Test Automation|INTERMEDIATE;CI/CD|ADVANCED,QA Automation Engineer
+BCA,STUDENT,web developer,TypeScript|INTERMEDIATE;JavaScript|BEGINNER;CSS|BEGINNER;REST APIs|INTERMEDIATE;React|BEGINNER,Frontend Developer
+B.Sc Statistics,JUNIOR,business intelligence analyst,Pandas|BEGINNER;Statistics|INTERMEDIATE;Excel|ADVANCED;Tableau|ADVANCED,Data Analyst
+B.Tech Computer Science,STUDENT,qa automation engineer,Git|ADVANCED;Java|INTERMEDIATE;Test Automation|INTERMEDIATE;API Testing|BEGINNER;CI/CD|INTERMEDIATE;JUnit|BEGINNER,QA Automation Engineer
+B.Sc Information Technology,ENTRY_LEVEL,cybersecurity analyst,Python|INTERMEDIATE;Linux|BEGINNER;SIEM|BEGINNER;Risk Assessment|INTERMEDIATE,Cybersecurity Analyst
+B.Tech Computer Science,JUNIOR,web developer,TypeScript|ADVANCED;REST APIs|INTERMEDIATE;Git|BEGINNER;CSS|BEGINNER;JavaScript|BEGINNER;Vite|INTERMEDIATE,Frontend Developer
+M.Sc Statistics,STUDENT,machine learning engineer,Machine Learning|ADVANCED;SQL|BEGINNER;NumPy|ADVANCED;Scikit-learn|BEGINNER;Pandas|INTERMEDIATE;Statistics|BEGINNER,Data Scientist
+B.Tech Information Technology,STUDENT,product analyst,Requirements Analysis|BEGINNER;SQL|ADVANCED;Business Process|ADVANCED;Communication|BEGINNER;Excel|INTERMEDIATE,Business Analyst
+B.Tech Cybersecurity,ENTRY_LEVEL,soc analyst,Firewalls|ADVANCED;SIEM|INTERMEDIATE;Python|ADVANCED;Cryptography|INTERMEDIATE;Network Security|BEGINNER,Cybersecurity Analyst
+B.Tech Computer Science,JUNIOR,react developer,HTML|BEGINNER;Git|INTERMEDIATE;CSS|INTERMEDIATE;TypeScript|INTERMEDIATE;Vite|INTERMEDIATE;JavaScript|ADVANCED,Frontend Developer
+MBA,ENTRY_LEVEL,systems analyst,Requirements Analysis|INTERMEDIATE;Communication|ADVANCED;Excel|BEGINNER;Power BI|BEGINNER;Stakeholder Management|ADVANCED;Business Process|BEGINNER;Agile|ADVANCED,Business Analyst
+B.Tech Computer Science,JUNIOR,site reliability engineer,CI/CD|BEGINNER;Linux|INTERMEDIATE;Docker|ADVANCED;AWS|ADVANCED;Terraform|INTERMEDIATE,Cloud DevOps Engineer
+BBA,ENTRY_LEVEL,systems analyst,Power BI|BEGINNER;Requirements Analysis|ADVANCED;Business Process|INTERMEDIATE;Agile|INTERMEDIATE;SQL|ADVANCED;Stakeholder Management|INTERMEDIATE,Business Analyst
+B.Tech Computer Science,JUNIOR,api engineer,PostgreSQL|INTERMEDIATE;Java|BEGINNER;Git|ADVANCED;Maven|INTERMEDIATE;Spring Boot|ADVANCED,Backend Developer
+M.Sc Data Science,STUDENT,applied scientist,Machine Learning|INTERMEDIATE;Statistics|BEGINNER;SQL|INTERMEDIATE;Pandas|INTERMEDIATE,Data Scientist
+B.Tech Computer Science,ENTRY_LEVEL,data scientist,Statistics|BEGINNER;Scikit-learn|ADVANCED;Pandas|INTERMEDIATE;Python|INTERMEDIATE;NumPy|ADVANCED,Data Scientist
+B.Tech Cybersecurity,STUDENT,soc analyst,Linux|INTERMEDIATE;Network Security|ADVANCED;SIEM|BEGINNER;Python|ADVANCED,Cybersecurity Analyst
+B.Tech Computer Science,JUNIOR,java developer,Microservices|BEGINNER;PostgreSQL|BEGINNER;Java|ADVANCED;Docker|INTERMEDIATE,Backend Developer
+BCA,ENTRY_LEVEL,web developer,React|ADVANCED;REST APIs|BEGINNER;CSS|ADVANCED;JavaScript|BEGINNER,Frontend Developer
+BBA Analytics,JUNIOR,reporting analyst,Pandas|ADVANCED;Tableau|ADVANCED;Excel|ADVANCED;SQL|ADVANCED,Data Analyst
+MCA,STUDENT,cloud engineer,Kubernetes|INTERMEDIATE;CI/CD|INTERMEDIATE;Linux|ADVANCED;Docker|ADVANCED;AWS|BEGINNER;Terraform|INTERMEDIATE,Cloud DevOps Engineer
+BBA,STUDENT,systems analyst,Stakeholder Management|BEGINNER;Communication|INTERMEDIATE;Power BI|ADVANCED;Excel|INTERMEDIATE;SQL|BEGINNER;Agile|BEGINNER,Business Analyst
+B.Tech Computer Science,JUNIOR,security analyst,Python|BEGINNER;Network Security|BEGINNER;Incident Response|BEGINNER;SIEM|ADVANCED;Risk Assessment|BEGINNER,Cybersecurity Analyst
+BBA,ENTRY_LEVEL,product analyst,SQL|ADVANCED;Agile|BEGINNER;Stakeholder Management|ADVANCED;Business Process|INTERMEDIATE;Communication|BEGINNER;Requirements Analysis|ADVANCED,Business Analyst
+B.Sc Information Technology,STUDENT,frontend developer,TypeScript|INTERMEDIATE;Vite|ADVANCED;Git|INTERMEDIATE;REST APIs|BEGINNER;CSS|BEGINNER,Frontend Developer
+MCA,STUDENT,backend developer,Java|BEGINNER;PostgreSQL|ADVANCED;Docker|INTERMEDIATE;Spring Boot|BEGINNER;REST APIs|INTERMEDIATE,Backend Developer
+B.Tech Computer Science,STUDENT,backend developer,Git|INTERMEDIATE;Microservices|ADVANCED;Java|INTERMEDIATE;PostgreSQL|ADVANCED,Backend Developer
+B.Sc Information Technology,STUDENT,quality engineer,Git|INTERMEDIATE;API Testing|BEGINNER;JUnit|BEGINNER;Selenium|ADVANCED;CI/CD|ADVANCED;SQL|BEGINNER,QA Automation Engineer
+B.Tech Computer Science,JUNIOR,cloud engineer,Linux|INTERMEDIATE;Terraform|INTERMEDIATE;Git|INTERMEDIATE;CI/CD|BEGINNER,Cloud DevOps Engineer
+B.Sc Information Technology,STUDENT,web developer,React|ADVANCED;Vite|BEGINNER;REST APIs|ADVANCED;CSS|ADVANCED;Git|ADVANCED,Frontend Developer
+BCA,JUNIOR,software test engineer,Git|INTERMEDIATE;Test Automation|ADVANCED;Java|INTERMEDIATE;SQL|INTERMEDIATE;Selenium|ADVANCED,QA Automation Engineer
+B.Tech Cybersecurity,JUNIOR,soc analyst,Cryptography|BEGINNER;Risk Assessment|ADVANCED;Incident Response|ADVANCED;Firewalls|ADVANCED;Python|INTERMEDIATE;Network Security|ADVANCED;SIEM|ADVANCED,Cybersecurity Analyst
+B.Sc Information Technology,JUNIOR,react developer,JavaScript|ADVANCED;Git|BEGINNER;React|BEGINNER;Vite|BEGINNER;HTML|ADVANCED;TypeScript|BEGINNER;CSS|INTERMEDIATE,Frontend Developer
+B.Tech Computer Science,STUDENT,business intelligence analyst,Data Visualization|ADVANCED;Pandas|ADVANCED;Tableau|INTERMEDIATE;Python|BEGINNER;Power BI|INTERMEDIATE,Data Analyst
+B.Tech Computer Science,JUNIOR,data analyst,Excel|ADVANCED;Power BI|INTERMEDIATE;Statistics|ADVANCED;SQL|INTERMEDIATE,Data Analyst
+M.Sc Data Science,STUDENT,applied scientist,NumPy|INTERMEDIATE;Data Visualization|ADVANCED;Machine Learning|BEGINNER;Scikit-learn|BEGINNER;SQL|ADVANCED;Python|INTERMEDIATE,Data Scientist
+B.Tech Computer Science,ENTRY_LEVEL,api engineer,REST APIs|ADVANCED;Microservices|INTERMEDIATE;Git|ADVANCED;Maven|ADVANCED;PostgreSQL|ADVANCED;Java|INTERMEDIATE,Backend Developer
+B.Tech Computer Science,ENTRY_LEVEL,backend developer,Docker|BEGINNER;PostgreSQL|BEGINNER;Java|INTERMEDIATE;Spring Boot|BEGINNER,Backend Developer
+B.Tech Computer Science,ENTRY_LEVEL,site reliability engineer,Kubernetes|BEGINNER;Docker|INTERMEDIATE;AWS|INTERMEDIATE;Terraform|ADVANCED,Cloud DevOps Engineer
+B.Tech Computer Science,STUDENT,reporting analyst,Pandas|ADVANCED;Statistics|ADVANCED;Excel|INTERMEDIATE;SQL|BEGINNER;Tableau|INTERMEDIATE,Data Analyst
+MCA,STUDENT,devops engineer,Kubernetes|ADVANCED;Docker|INTERMEDIATE;CI/CD|INTERMEDIATE;Python|BEGINNER,Cloud DevOps Engineer
+MCA,JUNIOR,cloud engineer,Kubernetes|ADVANCED;Git|INTERMEDIATE;Python|INTERMEDIATE;CI/CD|ADVANCED;AWS|BEGINNER;Linux|BEGINNER,Cloud DevOps Engineer
+B.Tech Computer Science,STUDENT,frontend developer,React|BEGINNER;CSS|INTERMEDIATE;HTML|BEGINNER;Vite|BEGINNER;Git|ADVANCED;JavaScript|ADVANCED;TypeScript|INTERMEDIATE,Frontend Developer
+B.Tech Computer Science,STUDENT,reporting analyst,Excel|ADVANCED;Python|ADVANCED;Data Visualization|INTERMEDIATE;SQL|ADVANCED,Data Analyst
+B.Tech Computer Science,ENTRY_LEVEL,qa automation engineer,SQL|ADVANCED;JUnit|ADVANCED;CI/CD|INTERMEDIATE;Selenium|ADVANCED;API Testing|ADVANCED;Java|BEGINNER;Git|ADVANCED,QA Automation Engineer
+BBA,JUNIOR,product analyst,Communication|ADVANCED;Requirements Analysis|BEGINNER;Excel|ADVANCED;Agile|ADVANCED;Power BI|INTERMEDIATE,Business Analyst
+B.Sc Information Technology,ENTRY_LEVEL,web developer,CSS|ADVANCED;REST APIs|ADVANCED;Vite|INTERMEDIATE;TypeScript|BEGINNER;React|BEGINNER;JavaScript|BEGINNER;Git|INTERMEDIATE,Frontend Developer
+M.Sc Statistics,ENTRY_LEVEL,applied scientist,Pandas|BEGINNER;Scikit-learn|ADVANCED;Statistics|BEGINNER;SQL|BEGINNER;Machine Learning|INTERMEDIATE,Data Scientist
+B.Tech Computer Science,JUNIOR,api engineer,Microservices|ADVANCED;REST APIs|BEGINNER;Spring Boot|INTERMEDIATE;Java|BEGINNER;PostgreSQL|BEGINNER;Git|ADVANCED,Backend Developer
+MCA,JUNIOR,api engineer,Spring Boot|ADVANCED;Docker|BEGINNER;Microservices|BEGINNER;Maven|INTERMEDIATE;Git|BEGINNER;REST APIs|INTERMEDIATE,Backend Developer
+B.Tech Computer Science,ENTRY_LEVEL,security analyst,Firewalls|ADVANCED;Risk Assessment|ADVANCED;Incident Response|BEGINNER;Python|BEGINNER;Network Security|ADVANCED;Cryptography|ADVANCED,Cybersecurity Analyst
+B.Tech Information Technology,ENTRY_LEVEL,product analyst,SQL|INTERMEDIATE;Requirements Analysis|ADVANCED;Stakeholder Management|BEGINNER;Excel|BEGINNER;Agile|BEGINNER;Business Process|ADVANCED,Business Analyst
+B.Tech Computer Science,JUNIOR,web developer,TypeScript|BEGINNER;HTML|BEGINNER;React|INTERMEDIATE;Git|ADVANCED;CSS|ADVANCED,Frontend Developer
+MCA,ENTRY_LEVEL,java developer,Git|INTERMEDIATE;Spring Boot|ADVANCED;Maven|INTERMEDIATE;Docker|ADVANCED;Java|INTERMEDIATE;PostgreSQL|BEGINNER;Microservices|ADVANCED,Backend Developer
+B.Tech Computer Science,ENTRY_LEVEL,cloud engineer,CI/CD|BEGINNER;Git|BEGINNER;Docker|ADVANCED;Terraform|INTERMEDIATE,Cloud DevOps Engineer
+BCA,STUDENT,software test engineer,JUnit|BEGINNER;SQL|ADVANCED;CI/CD|BEGINNER;Git|BEGINNER;Java|ADVANCED;Selenium|BEGINNER;API Testing|BEGINNER,QA Automation Engineer
+B.Tech Computer Science,STUDENT,cybersecurity analyst,Firewalls|ADVANCED;Python|ADVANCED;Network Security|INTERMEDIATE;Cryptography|BEGINNER,Cybersecurity Analyst
+B.Tech Computer Science,ENTRY_LEVEL,quality engineer,Java|INTERMEDIATE;API Testing|INTERMEDIATE;Test Automation|INTERMEDIATE;JUnit|BEGINNER,QA Automation Engineer
+M.Sc Statistics,STUDENT,data scientist,NumPy|INTERMEDIATE;Data Visualization|ADVANCED;Scikit-learn|INTERMEDIATE;Machine Learning|INTERMEDIATE;Python|INTERMEDIATE;SQL|BEGINNER;Statistics|BEGINNER,Data Scientist
+B.Tech Computer Science,ENTRY_LEVEL,machine learning engineer,NumPy|INTERMEDIATE;SQL|INTERMEDIATE;Pandas|ADVANCED;Statistics|ADVANCED;Python|INTERMEDIATE,Data Scientist
+B.Tech Information Technology,JUNIOR,site reliability engineer,Terraform|INTERMEDIATE;Kubernetes|ADVANCED;Linux|INTERMEDIATE;CI/CD|INTERMEDIATE;Python|INTERMEDIATE;Git|INTERMEDIATE,Cloud DevOps Engineer
+B.Sc Information Technology,STUDENT,qa automation engineer,Java|ADVANCED;JUnit|INTERMEDIATE;Selenium|BEGINNER;Test Automation|ADVANCED;Git|INTERMEDIATE;API Testing|ADVANCED,QA Automation Engineer
+BBA Analytics,JUNIOR,reporting analyst,Power BI|BEGINNER;Statistics|INTERMEDIATE;Excel|BEGINNER;Tableau|INTERMEDIATE;SQL|ADVANCED;Data Visualization|INTERMEDIATE,Data Analyst
+M.Sc Data Science,ENTRY_LEVEL,data scientist,Data Visualization|ADVANCED;Scikit-learn|BEGINNER;Machine Learning|INTERMEDIATE;NumPy|BEGINNER;Statistics|BEGINNER,Data Scientist
+MCA,JUNIOR,site reliability engineer,Kubernetes|INTERMEDIATE;Python|ADVANCED;Linux|INTERMEDIATE;AWS|ADVANCED,Cloud DevOps Engineer
+B.Sc Statistics,JUNIOR,data analyst,Power BI|INTERMEDIATE;Data Visualization|ADVANCED;Pandas|BEGINNER;Excel|INTERMEDIATE,Data Analyst
+B.Tech Computer Science,JUNIOR,reporting analyst,Excel|ADVANCED;Power BI|BEGINNER;Data Visualization|INTERMEDIATE;Pandas|ADVANCED;SQL|BEGINNER;Tableau|ADVANCED;Python|BEGINNER,Data Analyst
+B.Sc Information Technology,JUNIOR,qa automation engineer,API Testing|ADVANCED;Git|INTERMEDIATE;Selenium|ADVANCED;JUnit|BEGINNER;Test Automation|BEGINNER,QA Automation Engineer
+BCA,STUDENT,web developer,Git|BEGINNER;REST APIs|ADVANCED;HTML|BEGINNER;TypeScript|INTERMEDIATE,Frontend Developer
+BBA,JUNIOR,product analyst,Communication|BEGINNER;Stakeholder Management|INTERMEDIATE;Agile|ADVANCED;SQL|INTERMEDIATE;Business Process|ADVANCED;Excel|BEGINNER,Business Analyst
+B.Sc Information Technology,ENTRY_LEVEL,software test engineer,API Testing|BEGINNER;JUnit|BEGINNER;Git|INTERMEDIATE;Test Automation|BEGINNER;SQL|ADVANCED;Java|BEGINNER;CI/CD|ADVANCED,QA Automation Engineer
+B.Tech Computer Science,JUNIOR,security analyst,Cryptography|ADVANCED;Linux|ADVANCED;SIEM|ADVANCED;Network Security|INTERMEDIATE,Cybersecurity Analyst
+B.Tech Computer Science,JUNIOR,business intelligence analyst,Data Visualization|INTERMEDIATE;Statistics|ADVANCED;Excel|ADVANCED;SQL|INTERMEDIATE,Data Analyst
+B.Tech Cybersecurity,JUNIOR,soc analyst,Risk Assessment|ADVANCED;Python|BEGINNER;SIEM|ADVANCED;Firewalls|BEGINNER,Cybersecurity Analyst
+BBA,ENTRY_LEVEL,product analyst,Power BI|ADVANCED;Requirements Analysis|ADVANCED;Agile|ADVANCED;Business Process|ADVANCED,Business Analyst
+B.Tech Information Technology,JUNIOR,business analyst,Communication|BEGINNER;Power BI|INTERMEDIATE;Requirements Analysis|BEGINNER;SQL|ADVANCED;Agile|ADVANCED;Stakeholder Management|INTERMEDIATE,Business Analyst
+BCA,ENTRY_LEVEL,api engineer,PostgreSQL|ADVANCED;Maven|ADVANCED;Microservices|ADVANCED;Spring Boot|BEGINNER;REST APIs|ADVANCED,Backend Developer
+B.Sc Information Technology,STUDENT,security analyst,Cryptography|BEGINNER;SIEM|ADVANCED;Network Security|BEGINNER;Risk Assessment|ADVANCED,Cybersecurity Analyst
+B.Tech Information Technology,ENTRY_LEVEL,business analyst,Business Process|ADVANCED;SQL|INTERMEDIATE;Excel|ADVANCED;Stakeholder Management|BEGINNER;Requirements Analysis|ADVANCED,Business Analyst
+MCA,STUDENT,site reliability engineer,Git|BEGINNER;Python|ADVANCED;Terraform|ADVANCED;Kubernetes|ADVANCED;Docker|ADVANCED,Cloud DevOps Engineer
+BCA,JUNIOR,react developer,Git|ADVANCED;REST APIs|ADVANCED;CSS|ADVANCED;JavaScript|BEGINNER;React|BEGINNER;Vite|BEGINNER,Frontend Developer
+B.Tech Computer Science,JUNIOR,java developer,Git|BEGINNER;REST APIs|BEGINNER;Maven|INTERMEDIATE;Docker|INTERMEDIATE;Microservices|INTERMEDIATE;Spring Boot|ADVANCED;PostgreSQL|BEGINNER,Backend Developer
+B.Tech Information Technology,JUNIOR,systems analyst,Agile|BEGINNER;Requirements Analysis|ADVANCED;Business Process|ADVANCED;Communication|ADVANCED;Excel|BEGINNER,Business Analyst
+BCA,ENTRY_LEVEL,backend developer,Git|BEGINNER;PostgreSQL|INTERMEDIATE;Maven|INTERMEDIATE;Spring Boot|ADVANCED,Backend Developer
+MCA,STUDENT,backend developer,Git|INTERMEDIATE;Microservices|ADVANCED;Java|BEGINNER;Docker|ADVANCED;Spring Boot|ADVANCED;Maven|BEGINNER;REST APIs|INTERMEDIATE,Backend Developer
+MCA,JUNIOR,site reliability engineer,Git|INTERMEDIATE;AWS|INTERMEDIATE;Terraform|ADVANCED;Linux|ADVANCED;Kubernetes|ADVANCED,Cloud DevOps Engineer
+B.Sc Information Technology,ENTRY_LEVEL,quality engineer,Java|ADVANCED;Selenium|BEGINNER;JUnit|ADVANCED;API Testing|BEGINNER;CI/CD|INTERMEDIATE,QA Automation Engineer
+BCA,JUNIOR,web developer,React|ADVANCED;Vite|BEGINNER;HTML|ADVANCED;REST APIs|INTERMEDIATE,Frontend Developer
+BCA,STUDENT,backend developer,REST APIs|ADVANCED;Java|ADVANCED;Maven|ADVANCED;Docker|ADVANCED,Backend Developer
+B.Tech Computer Science,JUNIOR,site reliability engineer,Docker|BEGINNER;Python|BEGINNER;Linux|BEGINNER;Kubernetes|INTERMEDIATE;CI/CD|INTERMEDIATE;Git|ADVANCED;AWS|BEGINNER,Cloud DevOps Engineer
+B.Sc Information Technology,JUNIOR,soc analyst,Linux|ADVANCED;Risk Assessment|BEGINNER;SIEM|INTERMEDIATE;Network Security|INTERMEDIATE;Python|INTERMEDIATE;Incident Response|ADVANCED;Firewalls|ADVANCED,Cybersecurity Analyst
+BCA,JUNIOR,api engineer,PostgreSQL|BEGINNER;Spring Boot|BEGINNER;Microservices|BEGINNER;REST APIs|INTERMEDIATE;Maven|ADVANCED;Git|BEGINNER;Java|ADVANCED,Backend Developer
+B.Tech Cybersecurity,STUDENT,security analyst,SIEM|ADVANCED;Network Security|ADVANCED;Firewalls|BEGINNER;Cryptography|ADVANCED;Risk Assessment|BEGINNER;Python|BEGINNER;Incident Response|ADVANCED,Cybersecurity Analyst
+BCA,JUNIOR,software test engineer,SQL|INTERMEDIATE;Java|BEGINNER;Git|ADVANCED;Test Automation|BEGINNER;CI/CD|ADVANCED,QA Automation Engineer
+BCA,STUDENT,web developer,Vite|INTERMEDIATE;React|BEGINNER;Git|BEGINNER;REST APIs|INTERMEDIATE,Frontend Developer
+MCA,STUDENT,backend developer,Microservices|BEGINNER;Spring Boot|ADVANCED;REST APIs|BEGINNER;Docker|INTERMEDIATE;Java|INTERMEDIATE;PostgreSQL|ADVANCED;Git|INTERMEDIATE,Backend Developer
+BCA,STUDENT,web developer,React|ADVANCED;CSS|BEGINNER;Vite|BEGINNER;JavaScript|BEGINNER,Frontend Developer
+B.Tech Computer Science,JUNIOR,reporting analyst,Python|ADVANCED;Statistics|INTERMEDIATE;Excel|INTERMEDIATE;Pandas|INTERMEDIATE;Tableau|INTERMEDIATE;Power BI|ADVANCED;Data Visualization|INTERMEDIATE,Data Analyst
+BBA,ENTRY_LEVEL,systems analyst,Communication|BEGINNER;Agile|BEGINNER;Power BI|ADVANCED;Excel|BEGINNER;Requirements Analysis|ADVANCED;Stakeholder Management|BEGINNER;SQL|BEGINNER,Business Analyst
+B.Tech Information Technology,JUNIOR,systems analyst,SQL|BEGINNER;Communication|ADVANCED;Power BI|BEGINNER;Requirements Analysis|BEGINNER;Business Process|ADVANCED;Stakeholder Management|INTERMEDIATE;Excel|ADVANCED,Business Analyst
+B.Tech Information Technology,STUDENT,site reliability engineer,AWS|INTERMEDIATE;Terraform|INTERMEDIATE;Python|INTERMEDIATE;Git|ADVANCED;Linux|ADVANCED;Docker|ADVANCED;CI/CD|ADVANCED,Cloud DevOps Engineer
+B.Tech Computer Science,STUDENT,data scientist,Scikit-learn|ADVANCED;SQL|ADVANCED;NumPy|INTERMEDIATE;Pandas|ADVANCED,Data Scientist
+B.Sc Statistics,ENTRY_LEVEL,data analyst,Python|BEGINNER;Data Visualization|INTERMEDIATE;Excel|INTERMEDIATE;SQL|ADVANCED;Statistics|INTERMEDIATE;Tableau|INTERMEDIATE,Data Analyst
+MBA,JUNIOR,product analyst,Business Process|ADVANCED;SQL|INTERMEDIATE;Excel|ADVANCED;Agile|INTERMEDIATE;Communication|INTERMEDIATE;Requirements Analysis|ADVANCED;Stakeholder Management|ADVANCED,Business Analyst
+B.Tech Computer Science,STUDENT,reporting analyst,Pandas|ADVANCED;Python|INTERMEDIATE;Excel|ADVANCED;SQL|BEGINNER;Data Visualization|INTERMEDIATE;Power BI|BEGINNER,Data Analyst
+MCA,JUNIOR,api engineer,Maven|INTERMEDIATE;Spring Boot|INTERMEDIATE;PostgreSQL|INTERMEDIATE;Git|ADVANCED,Backend Developer
+B.Tech Computer Science,JUNIOR,web developer,REST APIs|ADVANCED;JavaScript|INTERMEDIATE;HTML|ADVANCED;CSS|INTERMEDIATE;Git|INTERMEDIATE;Vite|INTERMEDIATE;React|INTERMEDIATE,Frontend Developer
+MBA,STUDENT,product analyst,Communication|BEGINNER;SQL|BEGINNER;Business Process|ADVANCED;Agile|ADVANCED;Excel|BEGINNER,Business Analyst
+B.Tech Information Technology,STUDENT,site reliability engineer,AWS|INTERMEDIATE;Terraform|ADVANCED;Git|INTERMEDIATE;CI/CD|INTERMEDIATE;Linux|ADVANCED;Kubernetes|INTERMEDIATE,Cloud DevOps Engineer
+B.Tech Information Technology,JUNIOR,business analyst,Excel|BEGINNER;Business Process|BEGINNER;Agile|ADVANCED;Power BI|INTERMEDIATE;Communication|ADVANCED;SQL|BEGINNER,Business Analyst
+B.Tech Computer Science,ENTRY_LEVEL,cloud engineer,Terraform|ADVANCED;Kubernetes|INTERMEDIATE;Git|INTERMEDIATE;AWS|BEGINNER;Linux|BEGINNER,Cloud DevOps Engineer
+B.Tech Information Technology,JUNIOR,devops engineer,AWS|ADVANCED;Git|BEGINNER;Linux|BEGINNER;Docker|BEGINNER;CI/CD|BEGINNER;Terraform|BEGINNER;Python|ADVANCED,Cloud DevOps Engineer
+M.Sc Data Science,ENTRY_LEVEL,data scientist,Python|ADVANCED;Statistics|BEGINNER;Scikit-learn|BEGINNER;NumPy|BEGINNER,Data Scientist
+B.Sc Information Technology,STUDENT,quality engineer,Git|INTERMEDIATE;Selenium|INTERMEDIATE;CI/CD|BEGINNER;Java|ADVANCED;Test Automation|ADVANCED;JUnit|BEGINNER;API Testing|INTERMEDIATE,QA Automation Engineer
+B.Tech Information Technology,ENTRY_LEVEL,site reliability engineer,CI/CD|BEGINNER;Linux|BEGINNER;Docker|ADVANCED;Python|INTERMEDIATE;AWS|BEGINNER;Git|INTERMEDIATE;Terraform|INTERMEDIATE,Cloud DevOps Engineer
+MCA,ENTRY_LEVEL,site reliability engineer,Python|ADVANCED;Terraform|ADVANCED;AWS|BEGINNER;Docker|ADVANCED;Kubernetes|BEGINNER,Cloud DevOps Engineer
+M.Sc Statistics,STUDENT,applied scientist,Scikit-learn|BEGINNER;Data Visualization|INTERMEDIATE;Python|BEGINNER;SQL|INTERMEDIATE,Data Scientist
+MCA,ENTRY_LEVEL,cloud engineer,Terraform|BEGINNER;Python|ADVANCED;Kubernetes|ADVANCED;Git|BEGINNER;AWS|ADVANCED;Docker|BEGINNER;Linux|BEGINNER,Cloud DevOps Engineer
+B.Sc Statistics,STUDENT,data analyst,Pandas|BEGINNER;Data Visualization|ADVANCED;Tableau|ADVANCED;Statistics|ADVANCED;Python|BEGINNER,Data Analyst
+M.Sc Statistics,JUNIOR,machine learning engineer,SQL|ADVANCED;Statistics|BEGINNER;Data Visualization|INTERMEDIATE;Scikit-learn|BEGINNER;Pandas|BEGINNER,Data Scientist
+B.Tech Computer Science,ENTRY_LEVEL,software test engineer,Git|BEGINNER;JUnit|ADVANCED;Java|INTERMEDIATE;Selenium|INTERMEDIATE;SQL|ADVANCED,QA Automation Engineer
+B.Tech Computer Science,JUNIOR,data scientist,Data Visualization|ADVANCED;NumPy|ADVANCED;Machine Learning|BEGINNER;Pandas|ADVANCED;Scikit-learn|ADVANCED;Python|INTERMEDIATE;Statistics|BEGINNER,Data Scientist
+B.Tech Computer Science,STUDENT,frontend developer,Vite|ADVANCED;CSS|INTERMEDIATE;TypeScript|ADVANCED;Git|BEGINNER;HTML|ADVANCED,Frontend Developer
+B.Sc Information Technology,ENTRY_LEVEL,software test engineer,JUnit|ADVANCED;API Testing|ADVANCED;Test Automation|BEGINNER;Selenium|ADVANCED;Java|BEGINNER;Git|BEGINNER;SQL|INTERMEDIATE,QA Automation Engineer
+B.Tech Information Technology,ENTRY_LEVEL,systems analyst,Communication|BEGINNER;Business Process|BEGINNER;Requirements Analysis|INTERMEDIATE;SQL|INTERMEDIATE;Stakeholder Management|BEGINNER;Power BI|ADVANCED,Business Analyst
+MCA,STUDENT,java developer,Docker|BEGINNER;REST APIs|ADVANCED;Maven|BEGINNER;Git|BEGINNER,Backend Developer
+B.Sc Information Technology,ENTRY_LEVEL,react developer,REST APIs|BEGINNER;CSS|ADVANCED;HTML|BEGINNER;Git|BEGINNER;React|ADVANCED;Vite|ADVANCED;TypeScript|INTERMEDIATE,Frontend Developer
+M.Sc Statistics,ENTRY_LEVEL,data scientist,Data Visualization|ADVANCED;Machine Learning|INTERMEDIATE;SQL|INTERMEDIATE;Statistics|ADVANCED;Scikit-learn|ADVANCED;Pandas|INTERMEDIATE,Data Scientist
+B.Tech Information Technology,JUNIOR,site reliability engineer,Docker|ADVANCED;Git|ADVANCED;AWS|INTERMEDIATE;Kubernetes|INTERMEDIATE;CI/CD|ADVANCED,Cloud DevOps Engineer
+B.Tech Information Technology,ENTRY_LEVEL,business analyst,Business Process|ADVANCED;SQL|INTERMEDIATE;Excel|ADVANCED;Power BI|BEGINNER;Requirements Analysis|ADVANCED;Communication|BEGINNER,Business Analyst
+B.Sc Information Technology,JUNIOR,security analyst,Cryptography|BEGINNER;Incident Response|INTERMEDIATE;Python|BEGINNER;Risk Assessment|ADVANCED,Cybersecurity Analyst
+B.Tech Cybersecurity,STUDENT,cybersecurity analyst,SIEM|BEGINNER;Incident Response|BEGINNER;Risk Assessment|INTERMEDIATE;Firewalls|INTERMEDIATE;Python|INTERMEDIATE,Cybersecurity Analyst
+MCA,JUNIOR,java developer,Docker|BEGINNER;REST APIs|ADVANCED;PostgreSQL|ADVANCED;Maven|BEGINNER;Java|ADVANCED;Microservices|ADVANCED;Spring Boot|BEGINNER,Backend Developer
+M.Sc Statistics,STUDENT,applied scientist,Statistics|BEGINNER;Machine Learning|BEGINNER;Scikit-learn|BEGINNER;NumPy|INTERMEDIATE,Data Scientist
+B.Sc Statistics,JUNIOR,business intelligence analyst,Excel|INTERMEDIATE;Pandas|BEGINNER;Data Visualization|BEGINNER;Statistics|BEGINNER;Tableau|BEGINNER,Data Analyst
+M.Sc Data Science,STUDENT,applied scientist,Scikit-learn|BEGINNER;Statistics|BEGINNER;NumPy|INTERMEDIATE;SQL|ADVANCED;Machine Learning|ADVANCED,Data Scientist
+B.Tech Computer Science,STUDENT,reporting analyst,Pandas|INTERMEDIATE;Tableau|ADVANCED;Statistics|BEGINNER;Excel|BEGINNER;SQL|BEGINNER;Python|ADVANCED;Data Visualization|INTERMEDIATE,Data Analyst
+BCA,ENTRY_LEVEL,qa automation engineer,Test Automation|BEGINNER;Git|BEGINNER;CI/CD|BEGINNER;SQL|ADVANCED,QA Automation Engineer
+B.Tech Computer Science,ENTRY_LEVEL,reporting analyst,SQL|ADVANCED;Pandas|BEGINNER;Tableau|ADVANCED;Python|ADVANCED,Data Analyst
+BCA,ENTRY_LEVEL,web developer,HTML|INTERMEDIATE;Git|BEGINNER;Vite|BEGINNER;REST APIs|ADVANCED;TypeScript|ADVANCED;JavaScript|INTERMEDIATE,Frontend Developer
+B.Tech Information Technology,STUDENT,business analyst,Excel|INTERMEDIATE;Requirements Analysis|ADVANCED;Business Process|INTERMEDIATE;Power BI|BEGINNER,Business Analyst
+MCA,ENTRY_LEVEL,java developer,Microservices|ADVANCED;REST APIs|INTERMEDIATE;Maven|INTERMEDIATE;Java|ADVANCED;Spring Boot|ADVANCED,Backend Developer
+M.Sc Data Science,JUNIOR,applied scientist,SQL|BEGINNER;Scikit-learn|ADVANCED;NumPy|INTERMEDIATE;Python|BEGINNER,Data Scientist
+M.Sc Statistics,STUDENT,data scientist,Scikit-learn|BEGINNER;Python|BEGINNER;Pandas|ADVANCED;Machine Learning|ADVANCED;Statistics|BEGINNER;SQL|ADVANCED,Data Scientist
+B.Tech Computer Science,JUNIOR,business intelligence analyst,Tableau|BEGINNER;Data Visualization|INTERMEDIATE;Power BI|BEGINNER;SQL|BEGINNER,Data Analyst
+MCA,ENTRY_LEVEL,api engineer,Microservices|BEGINNER;Maven|ADVANCED;REST APIs|INTERMEDIATE;PostgreSQL|ADVANCED;Docker|ADVANCED,Backend Developer
+BCA,JUNIOR,java developer,Java|ADVANCED;REST APIs|INTERMEDIATE;PostgreSQL|ADVANCED;Maven|BEGINNER;Git|ADVANCED,Backend Developer
+B.Tech Information Technology,STUDENT,site reliability engineer,Kubernetes|ADVANCED;Docker|INTERMEDIATE;Python|ADVANCED;Git|INTERMEDIATE;AWS|ADVANCED,Cloud DevOps Engineer
+MCA,ENTRY_LEVEL,java developer,Java|ADVANCED;REST APIs|ADVANCED;Maven|ADVANCED;Spring Boot|BEGINNER;Microservices|BEGINNER;PostgreSQL|BEGINNER,Backend Developer
+MBA,JUNIOR,systems analyst,Requirements Analysis|ADVANCED;Power BI|INTERMEDIATE;Excel|BEGINNER;Communication|BEGINNER;SQL|BEGINNER,Business Analyst
+MCA,STUDENT,site reliability engineer,Linux|BEGINNER;Python|ADVANCED;AWS|ADVANCED;Kubernetes|ADVANCED,Cloud DevOps Engineer
+BBA,STUDENT,business analyst,Communication|ADVANCED;Stakeholder Management|BEGINNER;Excel|ADVANCED;Agile|INTERMEDIATE,Business Analyst
+B.Tech Information Technology,STUDENT,systems analyst,Business Process|ADVANCED;SQL|INTERMEDIATE;Power BI|ADVANCED;Excel|INTERMEDIATE;Agile|ADVANCED;Requirements Analysis|ADVANCED;Stakeholder Management|ADVANCED,Business Analyst
+B.Tech Computer Science,ENTRY_LEVEL,soc analyst,Risk Assessment|INTERMEDIATE;Network Security|ADVANCED;Firewalls|ADVANCED;Incident Response|BEGINNER,Cybersecurity Analyst
+B.Tech Computer Science,ENTRY_LEVEL,frontend developer,Vite|ADVANCED;HTML|INTERMEDIATE;Git|ADVANCED;TypeScript|BEGINNER;REST APIs|ADVANCED,Frontend Developer
+B.Tech Computer Science,STUDENT,software test engineer,Java|INTERMEDIATE;Selenium|BEGINNER;API Testing|ADVANCED;Git|ADVANCED,QA Automation Engineer
+MCA,JUNIOR,devops engineer,Kubernetes|INTERMEDIATE;AWS|ADVANCED;Linux|ADVANCED;CI/CD|INTERMEDIATE,Cloud DevOps Engineer
+B.Sc Information Technology,STUDENT,react developer,Git|INTERMEDIATE;HTML|ADVANCED;React|ADVANCED;JavaScript|INTERMEDIATE;TypeScript|INTERMEDIATE;CSS|BEGINNER,Frontend Developer
+B.Sc Statistics,ENTRY_LEVEL,reporting analyst,Data Visualization|ADVANCED;SQL|ADVANCED;Pandas|ADVANCED;Statistics|BEGINNER;Excel|ADVANCED;Python|BEGINNER,Data Analyst
+B.Tech Computer Science,JUNIOR,soc analyst,Linux|BEGINNER;Incident Response|INTERMEDIATE;Firewalls|ADVANCED;Cryptography|BEGINNER;SIEM|ADVANCED;Risk Assessment|BEGINNER,Cybersecurity Analyst
+B.Tech Computer Science,ENTRY_LEVEL,machine learning engineer,NumPy|ADVANCED;Python|INTERMEDIATE;Scikit-learn|INTERMEDIATE;SQL|BEGINNER;Data Visualization|ADVANCED;Pandas|INTERMEDIATE;Statistics|BEGINNER,Data Scientist
+B.Tech Information Technology,ENTRY_LEVEL,cloud engineer,Python|BEGINNER;Docker|ADVANCED;AWS|INTERMEDIATE;Kubernetes|BEGINNER,Cloud DevOps Engineer
+BCA,JUNIOR,software test engineer,CI/CD|ADVANCED;Selenium|ADVANCED;Git|ADVANCED;SQL|BEGINNER;API Testing|BEGINNER,QA Automation Engineer
+B.Tech Computer Science,ENTRY_LEVEL,reporting analyst,Data Visualization|BEGINNER;Pandas|INTERMEDIATE;SQL|BEGINNER;Statistics|BEGINNER;Tableau|BEGINNER,Data Analyst
+B.Tech Computer Science,JUNIOR,java developer,Maven|INTERMEDIATE;Java|ADVANCED;Docker|BEGINNER;Microservices|ADVANCED;REST APIs|INTERMEDIATE;Spring Boot|BEGINNER;PostgreSQL|BEGINNER,Backend Developer
+M.Sc Statistics,JUNIOR,machine learning engineer,Machine Learning|INTERMEDIATE;NumPy|INTERMEDIATE;SQL|BEGINNER;Pandas|BEGINNER,Data Scientist
+B.Sc Information Technology,JUNIOR,software test engineer,Selenium|BEGINNER;JUnit|INTERMEDIATE;CI/CD|INTERMEDIATE;Java|INTERMEDIATE;SQL|INTERMEDIATE;Git|INTERMEDIATE;Test Automation|INTERMEDIATE,QA Automation Engineer
+B.Tech Computer Science,JUNIOR,quality engineer,CI/CD|ADVANCED;API Testing|BEGINNER;Selenium|BEGINNER;Java|BEGINNER;Test Automation|INTERMEDIATE,QA Automation Engineer
+B.Tech Cybersecurity,JUNIOR,security analyst,Network Security|ADVANCED;SIEM|BEGINNER;Incident Response|INTERMEDIATE;Risk Assessment|ADVANCED;Linux|BEGINNER;Cryptography|ADVANCED,Cybersecurity Analyst
+B.Tech Computer Science,STUDENT,data scientist,Data Visualization|BEGINNER;Python|ADVANCED;Scikit-learn|ADVANCED;Pandas|INTERMEDIATE;SQL|BEGINNER;NumPy|ADVANCED,Data Scientist
+MBA,STUDENT,systems analyst,Business Process|ADVANCED;SQL|BEGINNER;Stakeholder Management|INTERMEDIATE;Communication|ADVANCED;Power BI|BEGINNER,Business Analyst
+BBA Analytics,ENTRY_LEVEL,business intelligence analyst,Power BI|INTERMEDIATE;Excel|INTERMEDIATE;Statistics|INTERMEDIATE;Tableau|INTERMEDIATE;Pandas|INTERMEDIATE;Data Visualization|ADVANCED;SQL|BEGINNER,Data Analyst
+B.Tech Computer Science,ENTRY_LEVEL,react developer,React|INTERMEDIATE;Git|INTERMEDIATE;HTML|BEGINNER;REST APIs|BEGINNER;Vite|INTERMEDIATE;JavaScript|ADVANCED,Frontend Developer
+MBA,STUDENT,product analyst,Business Process|ADVANCED;Excel|BEGINNER;SQL|BEGINNER;Requirements Analysis|INTERMEDIATE,Business Analyst
+BBA,JUNIOR,systems analyst,Power BI|INTERMEDIATE;Communication|BEGINNER;SQL|ADVANCED;Agile|ADVANCED;Requirements Analysis|ADVANCED;Stakeholder Management|BEGINNER;Excel|BEGINNER,Business Analyst
+B.Sc Information Technology,JUNIOR,security analyst,Linux|ADVANCED;Incident Response|ADVANCED;Risk Assessment|INTERMEDIATE;Python|INTERMEDIATE;Firewalls|BEGINNER;SIEM|BEGINNER,Cybersecurity Analyst

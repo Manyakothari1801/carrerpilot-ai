@@ -1,0 +1,3 @@
+package com.careerpilot.modules.assessment.service;
+import com.careerpilot.modules.assessment.entity.*;import org.springframework.stereotype.Component;import java.util.*;
+@Component public class AttemptQuestionSet{public List<AssessmentQuestion>resolve(AssessmentAttempt attempt){if(!attempt.getSelectedQuestions().isEmpty())return attempt.getSelectedQuestions().stream().sorted(Comparator.comparingInt(AssessmentAttemptQuestion::getQuestionOrder)).map(AssessmentAttemptQuestion::getQuestion).toList();return attempt.getAssessment().getQuestions().stream().sorted(Comparator.comparingInt(AssessmentQuestion::getQuestionOrder)).limit(attempt.getTotalQuestions()).toList();}}

@@ -1,0 +1,10 @@
+ALTER TABLE scheduled_exams ADD COLUMN owner_user_id UUID REFERENCES users(id) ON DELETE CASCADE;
+ALTER TABLE scheduled_exams ADD COLUMN attempt_id UUID UNIQUE REFERENCES assessment_attempts(id) ON DELETE RESTRICT;
+ALTER TABLE scheduled_exams ADD COLUMN reschedule_count INTEGER NOT NULL DEFAULT 0 CHECK(reschedule_count >= 0);
+ALTER TABLE scheduled_exams ADD COLUMN last_rescheduled_at TIMESTAMPTZ;
+ALTER TABLE scheduled_exams ADD COLUMN cancelled_at TIMESTAMPTZ;
+CREATE UNIQUE INDEX uk_student_assessment_exact_schedule ON scheduled_exams(owner_user_id,assessment_id,scheduled_start) WHERE owner_user_id IS NOT NULL;
+CREATE INDEX idx_scheduled_exams_owner ON scheduled_exams(owner_user_id,scheduled_start DESC);
+CREATE TABLE scheduled_exam_reschedule_history(id UUID PRIMARY KEY,scheduled_exam_id UUID NOT NULL REFERENCES scheduled_exams(id) ON DELETE CASCADE,student_user_id UUID NOT NULL REFERENCES users(id) ON DELETE CASCADE,old_start TIMESTAMPTZ NOT NULL,old_end TIMESTAMPTZ NOT NULL,new_start TIMESTAMPTZ NOT NULL,new_end TIMESTAMPTZ NOT NULL,changed_at TIMESTAMPTZ NOT NULL);
+CREATE INDEX idx_schedule_history_exam ON scheduled_exam_reschedule_history(scheduled_exam_id,changed_at);
+COMMENT ON COLUMN scheduled_exams.owner_user_id IS 'Student owner for V12 self-schedules; null identifies preserved legacy V11 admin schedules.';

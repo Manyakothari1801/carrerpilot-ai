@@ -1,0 +1,2 @@
+import{api}from'@/src/api/client';import type{Profile,ProfileUpdate,SkillInput,UserSkill}from'./profileTypes';
+export const profileService={async get(){return(await api.get<Profile>('/profile')).data},async skills(){return(await api.get<UserSkill[]>('/profile/skills')).data},async update(value:ProfileUpdate){return(await api.patch<Profile>('/profile',value)).data},async updateSkills(skills:SkillInput[]){return(await api.put<UserSkill[]>('/profile/skills',{skills})).data}};

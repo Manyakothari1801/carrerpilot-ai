@@ -1,0 +1,3 @@
+package com.careerpilot.modules.assessment.dto;
+import com.careerpilot.modules.assessment.entity.AttemptStatus;import java.time.Instant;import java.util.*;
+public record AttemptResponse(UUID id,AssessmentSummaryResponse assessment,AttemptStatus status,Instant startedAt,Instant expiresAt,Instant submittedAt,Integer scorePercentage,Boolean passed,int correctAnswers,int incorrectAnswers,int unanswered,int totalQuestions,Integer durationSeconds,List<QuestionResponse>questions,List<AttemptQuestionResult>results,List<BreakdownResponse>scoreBySkill,List<BreakdownResponse>scoreByDifficulty,String strongestTopic,String weakestTopic){}

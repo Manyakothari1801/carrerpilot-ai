@@ -1,0 +1,28 @@
+# Viva notes
+
+- **What problem is solved?** It unifies explainable resume improvement, career discovery, skill planning, and assessment preparation for students.
+- **Why Spring Boot?** It provides mature security, validation, transactions, JPA, migrations, testing, and modular backend organization.
+- **Why React Native/Expo?** One TypeScript mobile codebase, reliable device APIs, router/build tooling, and fast academic prototyping.
+- **Why PostgreSQL?** Strong relational integrity, transactional ownership data, indexing, and Flyway-compatible schema evolution.
+- **Why FastAPI?** It isolates Python/scikit-learn inference behind a small typed private HTTP contract.
+- **Why a separate ML service?** Java owns business/security logic while Python owns model training and inference dependencies; neither concern leaks into the other.
+- **What is AI here?** The integrated platform uses intelligent deterministic, ML, and LLM components. “AI” is the product umbrella, not one algorithm.
+- **What is ML?** A model learns parameters from labelled examples to predict classes for unseen feature inputs.
+- **What is an LLM?** A large pretrained language model generates language from prompts; Gemini is used only for resume writing feedback.
+- **ML versus Gemini?** Logistic Regression returns career probabilities from defined profile features; Gemini generates bounded qualitative text from resume context.
+- **Which ML algorithm?** Multiclass Logistic Regression selected by five-fold macro-F1 comparison with Multinomial Naive Bayes.
+- **Why Logistic Regression?** It is simple, probabilistic, reproducible, fast on sparse text features, and easier to explain than complex models.
+- **Dataset source?** A 240-row synthetic/curated academic dataset generated from eight authored career archetypes with seed 497.
+- **Why synthetic/curated?** No consented real placement dataset was available; transparent synthetic data supports pipeline demonstration without privacy claims.
+- **Why 100% synthetic evaluation?** The authored archetypes are deliberately strongly separable. It confirms pipeline consistency, not generalization.
+- **Why is that not 100% real-world accuracy?** Real profiles overlap, labels are subjective, populations drift, and fairness/external validation were not measured.
+- **What is TF-IDF?** It weights terms by frequency in one document and rarity across documents to represent informative keywords numerically.
+- **What is `predict_proba`?** It returns normalized class probabilities from Logistic Regression; they rank model fit and are not guarantees.
+- **What is ATS? Is it ML?** ATS is a deterministic, versioned rubric over resume sections, keywords, action verbs, quantified impact, and readability. It is not ML here.
+- **How does Job Match work? Is it ML?** Deterministic section-aware skill classification, TF-IDF/cosine similarity, and experience/education rules produce the score. It is not ML.
+- **What is Placement Readiness?** A transparent weighted index from available profile, skill-gap, resume, and assessment evidence with unavailable weights redistributed.
+- **Is readiness placement probability?** No. It measures preparation evidence only and does not predict employment.
+- **How is authentication secured?** Short-lived JWT access tokens, rotating/persisted refresh-token records, Spring Security authorization, password hashing, and owner-scoped queries.
+- **Why web-only exams?** It avoids duplicating a security-sensitive attempt engine; the web remains authoritative for questions, timer, answers, submission, and review.
+- **Limitations?** Synthetic ML data, optional external providers, no real-world outcome validation, web-only exams, and local networking requirements.
+- **Future scope?** Consented institutional evaluation, fairness studies, expanded taxonomies, secure production deployment, and optional notification channels.

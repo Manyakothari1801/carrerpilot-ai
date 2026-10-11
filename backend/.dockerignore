@@ -1,0 +1,6 @@
+target
+runtime
+.env
+.env.*
+!.env.example
+*.log

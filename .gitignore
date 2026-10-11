@@ -1,5 +1,6 @@
 .idea/
 .vscode/
+.codex-artifacts/
 .DS_Store
 Thumbs.db
 *.iml
@@ -15,3 +16,14 @@ frontend/node_modules/
 frontend/dist/
 frontend/.vite/
 frontend/.npm-cache/
+mobile/node_modules/
+mobile/dist/
+mobile/.expo/
+mobile/.npm-cache/
+ml-service/.venv/
+ml-service/**/__pycache__/
+ml-service/.pytest_cache/
+ml-service/.coverage
+ml-service/htmlcov/
+ml-service/*.egg-info/
+*.py[cod]

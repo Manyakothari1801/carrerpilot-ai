@@ -1,0 +1,8 @@
+export type AssessmentType='TECHNICAL_MCQ'|'APTITUDE_MCQ'|'ROLE_BASED_MCQ';export type Difficulty='EASY'|'MEDIUM'|'HARD';export type AttemptStatus='IN_PROGRESS'|'SUBMITTED'|'EXPIRED'|'ABANDONED';
+export interface AssessmentSummary{id:string;title:string;description:string;assessmentType:AssessmentType;targetRole?:string;difficulty:Difficulty;durationMinutes:number;totalQuestions:number;passingPercentage:number;catalogGroup:'PRACTICE'|'PLACEMENT_MOCK'}
+export interface Option{key:string;text:string}export interface Question{id:string;order:number;type:'MCQ';text:string;difficulty:Difficulty;skillTag?:string;options:Option[]}
+export interface AssessmentDetail{assessment:AssessmentSummary;questions:Question[];instructions:string}
+export interface AttemptSummary{id:string;assessmentId:string;assessmentTitle:string;status:AttemptStatus;startedAt:string;submittedAt?:string;scorePercentage?:number;passed?:boolean;durationSeconds?:number}
+export interface QuestionResult{questionId:string;order:number;question:string;selectedOptionKey?:string;selectedOptionText?:string;correctOptionKey:string;correctOptionText:string;explanation:string;skillTag?:string;difficulty:Difficulty;correct?:boolean}
+export interface Breakdown{label:string;correct:number;total:number;percentage:number}
+export interface Attempt{id:string;assessment:AssessmentSummary;status:AttemptStatus;startedAt:string;expiresAt:string;submittedAt?:string;scorePercentage?:number;passed?:boolean;correctAnswers:number;incorrectAnswers:number;unanswered:number;totalQuestions:number;durationSeconds?:number;questions:Question[];results:QuestionResult[];scoreBySkill:Breakdown[];scoreByDifficulty:Breakdown[];strongestTopic?:string;weakestTopic?:string}

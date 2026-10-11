@@ -16,9 +16,14 @@ erDiagram
     JOB_MATCHES ||--o{ SKILL_GAPS : reveals
     JOB_MATCHES ||--o{ ROADMAPS : generates
     ROADMAPS ||--o{ ROADMAP_ITEMS : contains
-    USERS ||--o{ ASSESSMENTS : owns
+    USERS ||--o{ ASSESSMENTS : optionally_creates
     ASSESSMENTS ||--o{ ASSESSMENT_QUESTIONS : contains
-    QUESTIONS ||--o{ ASSESSMENT_QUESTIONS : assigned
+    ASSESSMENT_QUESTIONS ||--o{ ASSESSMENT_OPTIONS : offers
+    USERS ||--o{ ASSESSMENT_ATTEMPTS : owns
+    ASSESSMENTS ||--o{ ASSESSMENT_ATTEMPTS : attempted_as
+    ASSESSMENT_ATTEMPTS ||--o{ ASSESSMENT_ATTEMPT_QUESTIONS : snapshots
+    ASSESSMENT_QUESTIONS ||--o{ ASSESSMENT_ATTEMPT_QUESTIONS : selected
+    ASSESSMENT_ATTEMPTS ||--o{ ASSESSMENT_ANSWERS : records
     USERS ||--o{ EXAM_SCHEDULES : schedules
     ASSESSMENTS ||--o{ EXAM_SCHEDULES : scheduled_as
     EXAM_SCHEDULES ||--o{ EXAM_ATTEMPTS : starts
@@ -28,7 +33,18 @@ erDiagram
     USERS ||--o{ NOTIFICATIONS : receives
     USERS ||--o{ CHAT_SESSIONS : starts
     CHAT_SESSIONS ||--o{ CHAT_MESSAGES : contains
+    USERS ||--o{ CAREER_RECOMMENDATIONS : owns
+    CAREER_RECOMMENDATIONS ||--o{ CAREER_RECOMMENDATION_ITEMS : ranks
+    USERS ||--o| CAREER_PLANS : selects
+    CAREER_RECOMMENDATIONS ||--o{ CAREER_PLANS : supports
+    CAREER_PLANS ||--o{ CAREER_ROADMAP_ITEMS : contains
 ```
+
+## M5 career recommendation snapshots
+
+Flyway V14 adds owner-scoped immutable recommendation snapshots. `CAREER_RECOMMENDATIONS` stores the input-context summary plus model and feature-schema versions; `CAREER_RECOMMENDATION_ITEMS` stores ordered career classes, actual model probabilities, and serialized profile-signal labels. No resume body, prompt, token, password, or answer key is stored.
+
+Flyway V15 adds the student-selected career plan and ordered roadmap items. Status-source metadata distinguishes saved profile/system evidence from user-reported tracking.
 
 ## Conventions
 
