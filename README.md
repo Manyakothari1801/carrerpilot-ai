@@ -1,185 +1,233 @@
-# Career Guidance AI
+## Local Development Setup (Windows)
 
-Official academic title: **Intelligent Career Guidance and Resume Optimization Platform Using AI**.
+Follow these instructions to run Career Guidance AI on your local machine.
 
-## Problem Statement
+### 1. Prerequisites
 
-Students often manage resumes, career exploration, skill planning, and placement preparation across disconnected tools. Career Guidance AI provides one authenticated, explainable platform for managing this journey while keeping high-impact scores deterministic and auditable.
+Install the following software:
 
-## Key Features
+- Git
+- Java JDK 21
+- Node.js and npm
+- Python 3.10 or later
+- Docker Desktop (for PostgreSQL)
+- VS Code (recommended)
+- Android Studio (optional, for the mobile application)
 
-- Student authentication, profile, skills, and protected ownership boundaries
-- PDF/DOCX resume management, parsing, deterministic ATS analysis, and optional Gemini writing feedback
-- Deterministic resume-to-job-description matching with persisted history
-- Profile-based trained career recommendations with persisted history
-- Career skill gaps, a staged roadmap, and transparent Placement Readiness
-- Stored assessments, deterministic server-side grading, result history, scheduling, rescheduling, cancellation, and email reminders
-- React web application for the complete experience and secure assessment attempts
-- Expo mobile companion for profiles, resumes, careers, plans, assessment management, and results
+### 2. Clone the Repository
 
-## System Architecture
-
-The Spring Boot modular monolith is the only public data API. React Web and React Native Mobile call it over authenticated REST. PostgreSQL stores application state and Flyway owns schema evolution. Spring Boot calls Gemini only for optional Resume Coach feedback and calls a private FastAPI service only for career recommendations. See [architecture](docs/ARCHITECTURE.md).
-
-## Technology Stack
-
-- Web: React 19, TypeScript, Vite, React Router, TanStack Query, Tailwind CSS
-- Mobile: React Native, Expo SDK 57, Expo Router, Axios, SecureStore
-- Backend: Java 21, Spring Boot 3, Spring Security, Spring Data JPA, Flyway, Maven
-- Data: PostgreSQL 16 with pgvector-compatible image
-- ML service: Python 3.11, FastAPI, scikit-learn, joblib
-- Optional LLM: Google Gemini
-
-## AI vs ML vs LLM Components
-
-- **AI platform:** the complete integrated decision-support application.
-- **ML:** a trained multiclass Logistic Regression model served through FastAPI for profile-based career recommendations. Its bundled dataset is synthetic/curated academic prototype data.
-- **LLM:** Gemini Resume Coach provides optional qualitative writing feedback. It never changes deterministic ATS scores.
-- **Deterministic algorithms:** ATS analysis, Job Match, skill-gap classification, roadmap generation, Placement Readiness, assessment selection, and grading.
-
-## Web vs Mobile Responsibilities
-
-Both clients support authenticated career-companion workflows. Actual assessment questions, timer, answer controls, proctoring boundaries, and submission remain **web-only**. Mobile schedules and manages assessments, displays summary history, and opens the established web scheduling route. Browser sign-in may be required; tokens are never transferred through URLs.
-
-## Repository Structure
-
-```text
-backend/       Spring Boot REST API and Flyway migrations
-frontend/      React web application
-mobile/        Expo mobile companion
-ml-service/    FastAPI inference service and reproducible training pipeline
-docs/          Architecture, privacy, runbook, demo, and viva documentation
-infra/         Infrastructure placeholders/configuration
-```
-
-## Prerequisites
-
-Java 21, Node.js 20+, Docker Desktop, Python 3.11, and PowerShell. Android development additionally requires an emulator or Expo-compatible device; cloud EAS builds require an Expo account only when the developer deliberately runs them.
-
-## Environment Setup
-
-Use [backend/.env.example](backend/.env.example), [frontend/.env.example](frontend/.env.example), [mobile/.env.example](mobile/.env.example), and [ml-service/.env.example](ml-service/.env.example). These contain placeholders or local-only defaults, never production secrets. Spring does not automatically load `.env`; set variables in PowerShell or an IDE.
-
-## Database Setup
+Open PowerShell and run:
 
 ```powershell
-docker compose up -d postgres
-docker compose ps
-docker port careerpilot-postgres
+git clone https://github.com/Manyakothari1801/carrerpilot-ai.git
+cd carrerpilot-ai
 ```
 
-PostgreSQL is exposed on host port `5433` and remains on `5432` inside the container. The named volume preserves data during normal restarts. Never use `docker compose down -v` when the data must be retained.
+### 3. PostgreSQL Database Setup
 
-## ML Model Training
+Start Docker Desktop.
 
-Training is required only if `ml-service/models/career_model.joblib` is absent:
+Create a PostgreSQL 16 container:
 
 ```powershell
-cd ml-service
-py -3.11 -m venv .venv
-.\.venv\Scripts\Activate.ps1
-python -m pip install -r requirements.txt
-python training/generate_curated_dataset.py
-python -m training.train
+docker run --name careerpilot-postgres -e POSTGRES_USER=careerpilot -e POSTGRES_PASSWORD=careerpilot -e POSTGRES_DB=careerpilot -p 5433:5432 -v careerpilot_pgdata:/var/lib/postgresql/data -d postgres:16
 ```
 
-Seed `497`, model version `career-rec-synthetic-v1`, and feature schema `profile-features-v1` make the prototype reproducible. Synthetic evaluation scores do not establish real-world accuracy, employability, or fairness.
-
-## Running FastAPI
+For subsequent runs:
 
 ```powershell
-cd ml-service
-.\.venv\Scripts\Activate.ps1
-uvicorn app.main:app --host 127.0.0.1 --port 8000
+docker start careerpilot-postgres
 ```
 
-Verify `http://localhost:8000/health` and `http://localhost:8000/version`.
+Database connection details:
 
-## Running Spring Boot
+- Host: `localhost`
+- Port: `5433`
+- Database: `careerpilot`
+- Username: `careerpilot`
+- Password: `careerpilot` (local development only)
+
+The Spring Boot backend uses Flyway for database migrations.
+
+### 4. Spring Boot Backend Setup
+
+Open a PowerShell terminal:
 
 ```powershell
 cd backend
-$env:SPRING_PROFILES_ACTIVE='local'
-$env:PORT='8081'
-$env:DB_URL='jdbc:postgresql://localhost:5433/careerpilot'
-$env:DB_USERNAME='careerpilot'
-$env:DB_PASSWORD='careerpilot_local'
-$env:JWT_SECRET='<at-least-32-random-characters>'
-$env:FRONTEND_ORIGIN='http://localhost:5173'
-$env:ML_SERVICE_URL='http://localhost:8000'
+Copy-Item .env.example .env
+```
+
+Open `backend/.env` and configure the local database connection:
+
+```dotenv
+SPRING_PROFILES_ACTIVE=local
+DB_URL=jdbc:postgresql://localhost:5433/careerpilot
+DB_USERNAME=careerpilot
+DB_PASSWORD=careerpilot
+JWT_SECRET=replace-with-a-unique-random-secret-at-least-32-characters
+FRONTEND_ORIGIN=http://localhost:5173
+APP_FRONTEND_URL=http://localhost:5173
+ML_SERVICE_URL=http://localhost:8000
+```
+
+Generate your own JWT secret. Do not share or commit it.
+
+To use Gemini-powered features, configure your own Gemini API key and enable the relevant AI settings.
+
+Run the backend:
+
+```powershell
 .\mvnw.cmd spring-boot:run
 ```
 
-## Running Web
+Backend URL:
+
+`http://localhost:8081`
+
+Keep this terminal running.
+
+### 5. FastAPI ML Service Setup
+
+Open a new PowerShell terminal from the project root:
+
+```powershell
+cd ml-service
+py -m venv .venv
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+```
+
+Start the ML service:
+
+```powershell
+python -m uvicorn app.main:app --host 127.0.0.1 --port 8000
+```
+
+ML service URL:
+
+`http://localhost:8000`
+
+API documentation (if enabled):
+
+`http://localhost:8000/docs`
+
+Keep this terminal running.
+
+### 6. React Frontend Setup
+
+Open another PowerShell terminal from the project root:
 
 ```powershell
 cd frontend
-$env:VITE_API_BASE_URL='http://localhost:8081/api/v1'
-npm install
+Copy-Item .env.example .env
+npm ci
+```
+
+Configure the frontend environment variables in `.env` using the backend URL `http://localhost:8081`. Use the variable names provided in `frontend/.env.example`.
+
+Start the frontend:
+
+```powershell
 npm run dev
 ```
 
-## Running Mobile
+Open the local URL displayed by Vite, typically:
 
-Android emulator:
+`http://localhost:5173`
 
-```powershell
-cd mobile
-$env:EXPO_PUBLIC_API_BASE_URL='http://10.0.2.2:8081/api/v1'
-$env:EXPO_PUBLIC_WEB_APP_URL='http://10.0.2.2:5173'
-npm install
-npm start
-```
+### 7. Expo Mobile Application (Optional)
 
-For a physical phone, replace `10.0.2.2` with the active PC LAN IPv4 address and allow ports 8081 and 5173 on the private-network firewall. The phone and PC must be on the same network.
+Install Android Studio and configure an Android emulator.
 
-## Android Build
-
-The Android package is `com.careerguidanceai.mobile`. Increment `expo.version` and `android.versionCode` for releases.
+Open another terminal:
 
 ```powershell
 cd mobile
-npx eas-cli build --platform android --profile preview     # installable demo APK
-npx eas-cli build --platform android --profile production  # store-style AAB
+Copy-Item .env.example .env
+npm ci
 ```
 
-These commands intentionally require an external Expo login and upload; they are not run automatically.
+Configure the mobile API URL in `.env` using the variable name in `mobile/.env.example`.
 
-## Testing
+For the standard Android emulator, the host computer can generally be reached using `10.0.2.2` instead of `localhost`.
+
+Start Expo:
 
 ```powershell
-cd backend
-.\mvnw.cmd clean test
-.\mvnw.cmd package -DskipTests
+npx expo start
+```
 
-cd ..\frontend
-npm run lint
-npm run build
+Press `a` to open the application in an available Android emulator.
 
-cd ..\mobile
-npm run typecheck
-npx expo-doctor --verbose
-npx expo export --platform android
+### 8. Recommended Startup Order
 
-cd ..\ml-service
+1. Start Docker Desktop and PostgreSQL.
+2. Start the FastAPI ML service.
+3. Start the Spring Boot backend.
+4. Start the React frontend.
+5. Start the Expo mobile application if needed.
+
+Keep the backend, frontend and ML service running in separate terminals.
+
+### 9. Common Troubleshooting
+
+**Java or Maven command not recognized**
+
+Verify Java 21:
+
+```powershell
+java -version
+```
+
+Use the included Maven wrapper:
+
+```powershell
+.\mvnw.cmd spring-boot:run
+```
+
+**Python virtual environment activation blocked**
+
+Run in PowerShell:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
 .\.venv\Scripts\Activate.ps1
-python -m pytest -q
 ```
 
-## Security
+**Database connection refused**
 
-JWT access and refresh tokens are stored in Expo SecureStore on mobile. AsyncStorage contains only theme and onboarding preferences. Resume, recommendation, plan, schedule, and attempt access is owner-scoped in Spring Boot. Gemini keys, mail credentials, database secrets, and JWT secrets remain backend-only. Server errors do not expose stack traces.
+Check whether Docker Desktop is running and inspect the container:
 
-## Limitations
+```powershell
+docker ps -a
+docker logs careerpilot-postgres
+```
 
-- The career dataset is small, synthetic, and limited to authored career archetypes.
-- Gemini, email, and semantic embeddings depend on optional external configuration and availability.
-- Semantic Job Match is unavailable when no embedding provider is configured; weights are redistributed transparently.
-- Mobile assessment execution is intentionally unsupported; students use the web application.
-- Local physical-device networking depends on LAN and firewall configuration.
+**Frontend cannot connect to backend**
 
-## Future Scope
+Verify the frontend API URL, backend port, and CORS settings.
 
-Future academic work may evaluate recommendations on consented real-world data, study fairness, add institution-specific roles, and improve secure deployment/observability. The current product is feature-complete; future work is not required for the present demonstration.
+**Mobile app cannot reach backend**
 
-For the exact Windows startup sequence use [RUNBOOK.md](docs/RUNBOOK.md). Faculty demonstrations can follow [DEMO_SCRIPT.md](docs/DEMO_SCRIPT.md), with concise defense preparation in [VIVA_NOTES.md](docs/VIVA_NOTES.md).
+Use the correct emulator or LAN address. A physical phone cannot use the laptop's `localhost` address.
+
+### 10. Security Guidelines
+
+- Never commit `.env` files containing real credentials.
+- Use `.env.example` files only for configuration templates.
+- Each teammate should generate their own JWT secret.
+- Do not commit Gemini API keys, SMTP passwords, database passwords or private keys.
+- Use separate credentials for production deployments.
+
+### 11. Quick Reference
+
+| Component | Technology | Local Port |
+|---|---|---|
+| Frontend | React, TypeScript, Vite | 5173 |
+| Backend | Java 21, Spring Boot | 8081 |
+| Database | PostgreSQL 16 | 5433 |
+| ML Service | Python, FastAPI | 8000 |
+| Mobile | React Native, Expo | Expo development server |
+
+**Note:** Configuration values and startup commands should be checked against the corresponding `.env.example`, Docker and application configuration files when the project is updated.
