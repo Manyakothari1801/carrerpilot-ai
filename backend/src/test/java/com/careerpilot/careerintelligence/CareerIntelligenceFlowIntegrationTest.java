@@ -49,10 +49,10 @@ class CareerIntelligenceFlowIntegrationTest {
         mvc.perform(post("/api/v1/career-intelligence/counterfactual").header("Authorization",auth).contentType("application/json").content("{\"targetCareer\":\"Astronaut\",\"maxChanges\":2}" )).andExpect(status().isUnprocessableEntity());
     }
 
-    @Test void mlFailureIsExplicitAndNoFallbackIsInvented() throws Exception {
+    @Test void unavailableExplanationDoesNotCorruptPredictionsOrInventOutput() throws Exception {
         String auth=register("twin-down@example.com");complete(auth);
         when(client.explain(any())).thenThrow(new ApiException(HttpStatus.SERVICE_UNAVAILABLE,"Career intelligence service is temporarily unavailable"));
-        mvc.perform(get("/api/v1/career-intelligence/explanation").header("Authorization",auth)).andExpect(status().isServiceUnavailable()).andExpect(jsonPath("$.message").value("Career intelligence service is temporarily unavailable"));
+        mvc.perform(get("/api/v1/career-intelligence/explanation").header("Authorization",auth)).andExpect(status().isOk()).andExpect(jsonPath("$.available").value(false)).andExpect(jsonPath("$.recommendations").isEmpty()).andExpect(jsonPath("$.availabilityMessage").value("Explanation service temporarily unavailable"));
     }
 
     private CareerPredictionClient.PredictionItem item(double confidence){return new CareerPredictionClient.PredictionItem("Backend Developer",confidence,List.of("Profile skill: Java"));}

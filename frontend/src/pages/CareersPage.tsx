@@ -69,7 +69,7 @@ export function CareersPage() {
           <p className="mt-1 text-xs text-slate-500">Actual model confidence</p>
           <h3 className="mt-3 text-sm font-semibold text-violet-200">Why this career?</h3>
           <ul className="mt-2 space-y-2 text-sm text-slate-400">{(explanation.data?.recommendations.find((value) => value.career === item.career)?.supportingSignals ?? []).slice(0,3).map((signal) => <li key={signal.feature}>• {signal.feature}</li>)}</ul>
-          {!explanation.isLoading && !explanation.data && <p className="mt-2 text-sm text-slate-500">Model explanation unavailable.</p>}
+          {!explanation.isLoading && (!explanation.data || !explanation.data.available) && <p className="mt-2 text-sm text-slate-500">{explanation.data?.availabilityMessage ?? 'Model explanation unavailable.'}</p>}
           <div className="mt-4 flex flex-wrap gap-2"><button className="secondary-button" disabled={createPlan.isPending} onClick={() => createPlan.mutate({ recommendationId: data.id, career: item.career }, { onSuccess: () => navigate('/student/career-plan') })}>Build Career Plan</button><Link className="secondary-button" to="/student/career-twin">Explain / Simulate</Link></div>
         </article>)}
       </section>

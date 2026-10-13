@@ -31,8 +31,14 @@ public class CareerIntelligenceService {
 
     @Transactional(readOnly=true)
     public ExplainResponse explain(User user){
-        var value=client.explain(base(user));
-        return new ExplainResponse(value.modelVersion(),value.featureSchemaVersion(),value.disclaimer(),value.recommendations().stream().map(item->new ExplainedItem(item.career(),item.confidence(),item.profileSignals(),item.supportingSignals().stream().map(v->new FeatureContribution(v.feature(),v.contribution())).toList(),item.limitingSignals().stream().map(v->new FeatureContribution(v.feature(),v.contribution())).toList())).toList());
+        var request=base(user);
+        try {
+            var value=client.explain(request);
+            return new ExplainResponse(value.modelVersion(),value.featureSchemaVersion(),value.disclaimer(),value.recommendations().stream().map(item->new ExplainedItem(item.career(),item.confidence(),item.profileSignals(),item.supportingSignals().stream().map(v->new FeatureContribution(v.feature(),v.contribution())).toList(),item.limitingSignals().stream().map(v->new FeatureContribution(v.feature(),v.contribution())).toList())).toList(),true,null);
+        } catch(ApiException exception) {
+            if(exception.getStatus()!=HttpStatus.SERVICE_UNAVAILABLE)throw exception;
+            return new ExplainResponse(null,null,"Career predictions remain valid, but model explanations are temporarily unavailable.",List.of(),false,"Explanation service temporarily unavailable");
+        }
     }
 
     @Transactional(readOnly=true)

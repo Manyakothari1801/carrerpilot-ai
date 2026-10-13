@@ -16,9 +16,13 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.concurrent.ThreadLocalRandom;
+import java.util.concurrent.atomic.AtomicLong;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Function;
 import java.util.function.LongSupplier;
 import java.util.regex.Pattern;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 
 @Service
 public class GeminiResumeAiFeedbackService implements ResumeAiFeedbackService {
@@ -26,9 +30,13 @@ public class GeminiResumeAiFeedbackService implements ResumeAiFeedbackService {
  private static final int MAX_ITEMS=8,MAX_TEXT=1200;
  private static final int MAX_ATTEMPTS=3;
  private static final long MAX_RETRY_AFTER_MS=30_000;
+ private static final long QUOTA_COOLDOWN_MS=60_000;
+ private static final long MODEL_CACHE_MS=15*60_000;
  private static final Pattern NUMBER=Pattern.compile("(?<![\\p{L}\\p{N}])(?:\\d[\\d,.]*)(?:%|ms|s|x)?(?![\\p{L}\\p{N}])",Pattern.CASE_INSENSITIVE);
  private static final String UNAVAILABLE="Local analysis completed, but AI feedback is temporarily unavailable.";
  private final AiProperties properties;private final AnalysisProperties analysis;private final ObjectMapper json;private final GeminiRequest request;private final ModelDiscovery discovery;private final RetrySleeper sleeper;private final LongSupplier jitter;
+ private final AtomicLong quotaCooldownUntil=new AtomicLong();private volatile CachedModel cachedFallback;
+ private final AtomicBoolean requestInFlight=new AtomicBoolean();
 
  @Autowired public GeminiResumeAiFeedbackService(AiProperties properties,AnalysisProperties analysis,ObjectMapper json){this(properties,analysis,json,request(properties),discovery(properties),Thread::sleep,()->ThreadLocalRandom.current().nextLong(251));}
  GeminiResumeAiFeedbackService(AiProperties properties,AnalysisProperties analysis,ObjectMapper json,GeminiRequest request,ModelDiscovery discovery,RetrySleeper sleeper,LongSupplier jitter){this.properties=properties;this.analysis=analysis;this.json=json;this.request=request;this.discovery=discovery;this.sleeper=sleeper;this.jitter=jitter;}
@@ -37,8 +45,13 @@ public class GeminiResumeAiFeedbackService implements ResumeAiFeedbackService {
  private static ModelDiscovery discovery(AiProperties properties){RestClient client=client(properties);return ()->client.get().uri("/v1beta/models?pageSize=1000").header("x-goog-api-key",properties.geminiApiKey()).retrieve().body(JsonNode.class);}
 
  @Override public AiFeedbackResult analyze(String resumeText){
- if(!properties.enabled())return AiFeedbackResult.disabled();
+  if(!properties.enabled())return AiFeedbackResult.disabled();
+  if(!requestInFlight.compareAndSet(false,true)){log.warn("Gemini feedback skipped operation=resume-analysis model={} reason=request_in_flight",safeModel());return AiFeedbackResult.failed(properties.geminiModel(),UNAVAILABLE);}
+  try{return analyzeOnce(resumeText);}finally{requestInFlight.set(false);}
+ }
+ private AiFeedbackResult analyzeOnce(String resumeText){
   if(properties.geminiApiKey()==null||properties.geminiApiKey().isBlank()){log.warn("Gemini feedback skipped model={} reason=missing_api_key",safeModel());return AiFeedbackResult.failed(properties.geminiModel(),"AI is enabled, but the Gemini API key is not configured.");}
+  if(System.currentTimeMillis()<quotaCooldownUntil.get()){log.warn("Gemini feedback skipped operation=resume-analysis model={} reason=quota_cooldown",safeModel());return AiFeedbackResult.failed(properties.geminiModel(),"Local analysis completed, but Gemini is temporarily rate limited.");}
   long started=System.nanoTime();
   AttemptTrace trace=new AttemptTrace(properties.geminiModel());
   try{
@@ -52,7 +65,7 @@ public class GeminiResumeAiFeedbackService implements ResumeAiFeedbackService {
    log.info("Gemini feedback completed model={} outcome={} httpStatus=200 finishReason={} elapsedMs={} findings={}",safe(trace.finalModel()),trace.fallback==null?"PRIMARY_SUCCESS":"FALLBACK_SUCCESS",safe(finishReason),elapsedMs(started),feedback.strengths().size()+feedback.weaknesses().size()+feedback.grammarSuggestions().size()+feedback.bulletRewrites().size()+feedback.summarySuggestions().size());
    return AiFeedbackResult.success(feedback,trace.primary,trace.fallback);
   }catch(ResourceAccessException exception){log.warn("Gemini transport failed final model={} fallbackModel={} elapsedMs={} reason={}",safe(trace.finalModel()),safe(trace.fallback),elapsedMs(started),safe(exception.getClass().getSimpleName()+": "+exception.getMessage()));return AiFeedbackResult.failed(trace.primary,trace.fallback,UNAVAILABLE);
-  }catch(RestClientResponseException exception){ProviderError error=providerError(exception);log.warn("Gemini provider failed final model={} fallbackModel={} httpStatus={} providerCode={} providerMessage={} elapsedMs={}",safe(trace.finalModel()),safe(trace.fallback),exception.getStatusCode().value(),error.code(),error.message(),elapsedMs(started));return AiFeedbackResult.failed(trace.primary,trace.fallback,providerFailureMessage(exception.getStatusCode().value()));
+  }catch(RestClientResponseException exception){ProviderError error=providerError(exception);if(exception.getStatusCode().value()==429)quotaCooldownUntil.accumulateAndGet(System.currentTimeMillis()+cooldownMs(exception),Math::max);log.warn("Gemini provider failed operation=resume-analysis finalModel={} fallbackModel={} httpStatus={} providerCode={} providerMessage={} elapsedMs={}",safe(trace.finalModel()),safe(trace.fallback),exception.getStatusCode().value(),error.code(),error.message(),elapsedMs(started));return AiFeedbackResult.failed(trace.primary,trace.fallback,providerFailureMessage(exception.getStatusCode().value()));
   }catch(Exception exception){log.warn("Gemini request failed model={} fallbackModel={} elapsedMs={} reason={}",safe(trace.finalModel()),safe(trace.fallback),elapsedMs(started),safe(exception.getClass().getSimpleName()+": "+exception.getMessage()));return AiFeedbackResult.failed(trace.primary,trace.fallback,UNAVAILABLE);}
  }
 
@@ -81,15 +94,16 @@ public class GeminiResumeAiFeedbackService implements ResumeAiFeedbackService {
  }
  private JsonNode executeFallback(Map<String,Object> body,long started,AttemptTrace trace,RuntimeException primaryFailure){
   String fallback;
-  try{fallback=selectFallbackModel(discovery.listModels()).orElse(null);}catch(RuntimeException exception){log.warn("Gemini model discovery failed primaryModel={} elapsedMs={} reason={}",safe(trace.primary),elapsedMs(started),safe(exception.getClass().getSimpleName()+": "+exception.getMessage()));throw primaryFailure;}
+  try{fallback=fallbackModel();}catch(RuntimeException exception){log.warn("Gemini model discovery failed primaryModel={} elapsedMs={} reason={}",safe(trace.primary),elapsedMs(started),safe(exception.getClass().getSimpleName()+": "+exception.getMessage()));throw primaryFailure;}
   if(fallback==null){log.warn("Gemini fallback unavailable primaryModel={} elapsedMs={} reason=no_live_flash_candidate",safe(trace.primary),elapsedMs(started));throw primaryFailure;}
   trace.fallback=fallback;log.info("Gemini fallback selected primaryModel={} fallbackModel={} elapsedMs={}",safe(trace.primary),safe(fallback),elapsedMs(started));
   try{return request.execute(fallback,bodyForModel(body,fallback));}catch(RestClientResponseException exception){ProviderError error=providerError(exception);log.warn("Gemini fallback failed model={} httpStatus={} providerCode={} providerMessage={} elapsedMs={}",safe(fallback),exception.getStatusCode().value(),error.code(),error.message(),elapsedMs(started));throw exception;}catch(ResourceAccessException exception){log.warn("Gemini fallback transport failed model={} elapsedMs={} reason={}",safe(fallback),elapsedMs(started),safe(exception.getClass().getSimpleName()+": "+exception.getMessage()));throw exception;}
  }
- Optional<String> selectFallbackModel(JsonNode response){if(response==null||!response.path("models").isArray())return Optional.empty();List<String> candidates=new ArrayList<>();for(JsonNode model:response.path("models")){String name=model.path("name").asText("").replaceFirst("^models/","");String lower=name.toLowerCase(Locale.ROOT);boolean generates=false;for(JsonNode method:model.path("supportedGenerationMethods"))if("generateContent".equals(method.asText()))generates=true;if(generates&&!name.equals(properties.geminiModel())&&lower.contains("flash")&&!lower.matches(".*(image|live|tts|audio|computer).*"))candidates.add(name);}return candidates.stream().sorted(Comparator.comparingInt(this::fallbackRank).thenComparing(Comparator.reverseOrder())).findFirst();}
- private int fallbackRank(String model){String lower=model.toLowerCase(Locale.ROOT);int rank=(lower.contains("preview")||lower.contains("exp")||lower.contains("latest"))?10:0;if(lower.contains("lite"))rank+=2;return rank;}
+ private String fallbackModel(){long now=System.currentTimeMillis();CachedModel cached=cachedFallback;if(cached!=null&&cached.expiresAt()>now)return cached.model();String selected=selectFallbackModel(discovery.listModels()).orElse(null);if(selected!=null)cachedFallback=new CachedModel(selected,now+MODEL_CACHE_MS);return selected;}
+ Optional<String> selectFallbackModel(JsonNode response){if(response==null||!response.path("models").isArray())return Optional.empty();Set<String> available=new HashSet<>();for(JsonNode model:response.path("models")){String name=model.path("name").asText("").replaceFirst("^models/","");boolean generates=false;for(JsonNode method:model.path("supportedGenerationMethods"))if("generateContent".equals(method.asText()))generates=true;if(generates)available.add(name);}return properties.fallbackModels().stream().map(String::trim).filter(name->!name.isEmpty()&&!name.equals(properties.geminiModel())&&available.contains(name)).findFirst();}
  private boolean isRetryable(RestClientResponseException exception){int status=exception.getStatusCode().value();return status==429||status==503;}
- private long retryDelayMs(RestClientResponseException exception,int attempt){String value=exception.getResponseHeaders()==null?null:exception.getResponseHeaders().getFirst("Retry-After");if(value!=null)try{return Math.min(MAX_RETRY_AFTER_MS,Math.max(0,Long.parseLong(value.trim())*1000));}catch(NumberFormatException ignored){}return localBackoffMs(attempt);}
+ private long retryDelayMs(RestClientResponseException exception,int attempt){String value=exception.getResponseHeaders()==null?null:exception.getResponseHeaders().getFirst("Retry-After");if(value!=null){try{return Math.min(MAX_RETRY_AFTER_MS,Math.max(0,Long.parseLong(value.trim())*1000));}catch(NumberFormatException ignored){try{return Math.min(MAX_RETRY_AFTER_MS,Math.max(0,ZonedDateTime.parse(value,DateTimeFormatter.RFC_1123_DATE_TIME).toInstant().toEpochMilli()-System.currentTimeMillis()));}catch(Exception ignoredDate){}}}return localBackoffMs(attempt);}
+ private long cooldownMs(RestClientResponseException exception){long retry=retryDelayMs(exception,2);return Math.max(QUOTA_COOLDOWN_MS,retry);}
  private long localBackoffMs(int attempt){return (attempt==1?1_000:2_000)+Math.floorMod(jitter.getAsLong(),251);}
  private void sleep(long millis){try{sleeper.sleep(millis);}catch(InterruptedException exception){Thread.currentThread().interrupt();throw new IllegalStateException("Gemini retry interrupted",exception);}}
 
@@ -102,6 +116,7 @@ public class GeminiResumeAiFeedbackService implements ResumeAiFeedbackService {
  private String safeModel(){return safe(properties.geminiModel());}
  private String safe(String value){if(value==null)return "unknown";String sanitized=value.replaceAll("(?i)(key|token|secret)=[^\\s,;]+","$1=[REDACTED]").replaceAll("[\\r\\n\\t]+"," ");return sanitized.substring(0,Math.min(sanitized.length(),300));}
  private record ProviderError(String code,String message){}
+ private record CachedModel(String model,long expiresAt){}
  private static final class AttemptTrace{private final String primary;private String fallback;private AttemptTrace(String primary){this.primary=primary;}private String finalModel(){return fallback==null?primary:fallback;}}
  @FunctionalInterface interface GeminiRequest{JsonNode execute(String model,Map<String,Object> body);}
  @FunctionalInterface interface ModelDiscovery{JsonNode listModels();}

@@ -9,7 +9,7 @@ export interface RoadmapItem{id:string;stageOrder:number;stageName:string;itemOr
 export interface CareerPlan{id:string;recommendationId:string;selectedCareer:string;taxonomyVersion:string;createdAt:string;updatedAt:string;skillGap:{score:number;present:SkillGapItem[];missingCore:SkillGapItem[];missingSupporting:SkillGapItem[];needsImprovement:SkillGapItem[]};placementReadiness:{score:number;version:string;components:ReadinessComponent[];howToImprove:string[];disclaimer:string};roadmap:RoadmapItem[];nextActions:string[];progressPercentage:number}
 export interface FeatureContribution{feature:string;contribution:number}
 export interface ExplainedRecommendation extends RecommendationItem{supportingSignals:FeatureContribution[];limitingSignals:FeatureContribution[]}
-export interface CareerExplanation{modelVersion:string;featureSchemaVersion:string;disclaimer:string;recommendations:ExplainedRecommendation[]}
+export interface CareerExplanation{modelVersion:string|null;featureSchemaVersion:string|null;disclaimer:string;recommendations:ExplainedRecommendation[];available:boolean;availabilityMessage:string|null}
 export interface CareerIntelligenceOptions{careers:string[];actionableSkills:string[]}
 export interface HypotheticalSkill{name:string;proficiency:string}
 export interface SimulationResult{modelVersion:string;featureSchemaVersion:string;before:RecommendationItem[];simulated:RecommendationItem[];appliedSkills:HypotheticalSkill[];disclaimer:string}

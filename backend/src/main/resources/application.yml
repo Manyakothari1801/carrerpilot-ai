@@ -41,8 +41,13 @@ server:
 
 management:
   health:
+    probes:
+      enabled: true
     mail:
       enabled: ${MAIL_HEALTH_ENABLED:false}
+    group:
+      readiness:
+        include: readinessState,db,authConfiguration
   endpoints.web.exposure.include: health,info
   endpoint.health.show-details: never
 
@@ -82,8 +87,9 @@ careerpilot:
     enabled: ${AI_ENABLED:false}
     gemini-api-key: ${GEMINI_API_KEY:}
     gemini-model: ${GEMINI_MODEL:gemini-3.6-flash}
-    connect-timeout: ${AI_CONNECT_TIMEOUT:PT5S}
-    request-timeout: ${AI_REQUEST_TIMEOUT:PT45S}
+    fallback-models: ${GEMINI_FALLBACK_MODELS:gemini-3.5-flash}
+    connect-timeout: ${AI_CONNECT_TIMEOUT:PT3S}
+    request-timeout: ${AI_REQUEST_TIMEOUT:PT20S}
   job-match:
     scoring-version: job-match-rules-v1
     min-description-characters: 100
@@ -118,4 +124,4 @@ logging:
   level:
     root: INFO
     com.careerpilot: INFO
-  pattern.console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} level=%-5level logger=%logger{36} message=\"%msg\"%n"
+  pattern.console: "%d{yyyy-MM-dd'T'HH:mm:ss.SSSXXX} level=%-5level requestId=%X{requestId:-none} logger=%logger{36} message=\"%msg\"%n"

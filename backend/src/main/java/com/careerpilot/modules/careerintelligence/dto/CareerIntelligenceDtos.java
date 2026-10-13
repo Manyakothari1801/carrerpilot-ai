@@ -17,7 +17,7 @@ public final class CareerIntelligenceDtos {
     public record CounterfactualRequest(@NotBlank @Size(max=120) String targetCareer,@Min(1) @Max(3) int maxChanges) {}
     public record FeatureContribution(String feature,double contribution) {}
     public record ExplainedItem(String career,double confidence,List<String> profileSignals,List<FeatureContribution> supportingSignals,List<FeatureContribution> limitingSignals) {}
-    public record ExplainResponse(String modelVersion,String featureSchemaVersion,String disclaimer,List<ExplainedItem> recommendations) {}
+    public record ExplainResponse(String modelVersion,String featureSchemaVersion,String disclaimer,List<ExplainedItem> recommendations,boolean available,String availabilityMessage) {}
     public record PredictionItem(String career,double confidence,List<String> profileSignals) {}
     public record SimulationResponse(String modelVersion,String featureSchemaVersion,List<PredictionItem> before,List<PredictionItem> simulated,List<SkillInput> appliedSkills,String disclaimer) {}
     public record CounterfactualResponse(String modelVersion,String featureSchemaVersion,String targetCareer,boolean found,int currentRank,Integer simulatedRank,double currentConfidence,Double simulatedConfidence,Double confidenceDelta,Integer rankDelta,List<SkillInput> proposedSkills,String disclaimer) {}

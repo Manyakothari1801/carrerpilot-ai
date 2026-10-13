@@ -1,6 +1,7 @@
 from fastapi.testclient import TestClient
 
 from app.main import app
+import app.main as main_module
 
 
 client = TestClient(app)
@@ -45,6 +46,19 @@ def test_explanation_uses_model_features_and_is_deterministic():
     assert item["supportingSignals"]
     assert all(signal["contribution"] > 0 for signal in item["supportingSignals"])
     assert first.json()["modelVersion"] == "career-rec-synthetic-v1"
+
+
+def test_explanation_failure_is_reported_without_affecting_prediction(monkeypatch):
+    original = main_module.predictor.explain
+    monkeypatch.setattr(main_module.predictor, "explain", lambda request: (_ for _ in ()).throw(MemoryError()))
+    try:
+        explanation = client.post("/explain", json=valid_request())
+        prediction = client.post("/predict", json=valid_request())
+    finally:
+        monkeypatch.setattr(main_module.predictor, "explain", original)
+    assert explanation.status_code == 503
+    assert explanation.json()["detail"] == "Explanation is temporarily unavailable"
+    assert prediction.status_code == 200
 
 
 def test_simulation_is_real_inference_and_does_not_mutate_input():

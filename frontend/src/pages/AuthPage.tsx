@@ -1,7 +1,7 @@
 import { useState, type FormEvent, type ReactNode } from 'react'
 import { Link, Navigate, useNavigate } from 'react-router-dom'
-import axios from 'axios'
 import { useAuth } from '../features/auth/AuthContext'
+import { authErrorMessage } from '../services/apiError'
 import { useTheme } from '../components/ThemeProvider'
 import { AppIcon } from '../components/AppIcon'
 import cosmoImage from '../assets/Cheerful Kawaii Astronaut Mascot.png'
@@ -10,7 +10,7 @@ export function AuthPage({ mode }: { mode: 'login' | 'register' }) {
   const { user, login, register } = useAuth(); const navigate = useNavigate()
   const [form, setForm] = useState({ fullName: '', email: '', password: '', confirmPassword: '' }); const [error, setError] = useState(''); const [busy, setBusy] = useState(false)
   if (user) return <Navigate to={user.role === 'ADMIN' ? '/admin' : '/student/dashboard'} replace />
-  const submit = async (event: FormEvent) => { event.preventDefault(); setError(''); setBusy(true); try { if (mode === 'login') await login(form.email, form.password); else await register(form.fullName, form.email, form.password, form.confirmPassword); navigate('/student/dashboard') } catch (err) { setError(axios.isAxiosError(err) ? err.response?.data?.message ?? 'Unable to continue' : 'Unable to continue') } finally { setBusy(false) } }
+  const submit = async (event: FormEvent) => { event.preventDefault(); if (busy) return; setError(''); setBusy(true); try { if (mode === 'login') await login(form.email, form.password); else await register(form.fullName, form.email, form.password, form.confirmPassword); navigate('/student/dashboard') } catch (err) { setError(authErrorMessage(err,mode)) } finally { setBusy(false) } }
   return <AuthShell title={mode === 'login' ? 'Welcome back' : 'Start building your career'} subtitle={mode === 'login' ? 'Sign in to your career workspace.' : 'Create your secure student account.'}>
     <form onSubmit={submit} className="auth-form">
       {mode === 'register' && <Field label="Full name" value={form.fullName} onChange={value => setForm({ ...form, fullName: value })} autoComplete="name" />}
