@@ -2,96 +2,142 @@ package com.careerpilot.notification;
 
 import com.careerpilot.modules.notification.email.ExamEmailDetails;
 import com.careerpilot.modules.notification.email.JavaMailEmailService;
-import jakarta.mail.internet.MimeMessage;
-import jakarta.mail.internet.MimeMultipart;
-import jakarta.mail.Part;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.test.util.ReflectionTestUtils;
 
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.time.Instant;
 import java.util.UUID;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 class JavaMailEmailServiceTest {
     private static final Instant START = Instant.parse("2026-09-20T04:30:00Z");
     private static final Instant END = Instant.parse("2026-09-20T04:50:00Z");
+    private final ObjectMapper mapper = new ObjectMapper();
 
-    @Test void scheduledEmailContainsProfessionalDynamicHtmlAndPlainFallback() throws Exception {
+    @Test
+    void scheduledEmailContainsProfessionalDynamicHtmlAndPlainFallback() throws Exception {
         Sent sent = send(Type.SCHEDULED);
-        assertThat(sent.message().getSubject()).isEqualTo("Assessment Scheduled – Java Assessment | Career Guidance AI");
+        assertThat(sent.subject()).isEqualTo("Assessment Scheduled – Java Assessment | Career Guidance AI");
         assertThat(sent.html()).contains("Dear Manya Kothari", "Java Assessment", "20 September 2026",
                 "10:00 AM (IST)", "10:20 AM (IST)", "Section 1", "Technical mcq", "10",
                 "Start Assessment", "http://localhost:5173/student/scheduled-exams", "General Instructions");
         assertThat(sent.plain()).contains("Dear Manya Kothari", "Start Assessment:", "Number of Questions: 10");
-        assertThat(sent.html()).doesNotContain("password", "App Password", "JWT", "secret");
+        assertThat(sent.html()).doesNotContain("App Password", "JWT", "secret");
     }
 
-    @Test void rescheduleAndReminderUseExpectedSubjectsAndContent() throws Exception {
+    @Test
+    void rescheduleAndReminderUseExpectedSubjectsAndContent() throws Exception {
         Sent rescheduled = send(Type.RESCHEDULED);
-        assertThat(rescheduled.message().getSubject()).isEqualTo("Assessment Rescheduled – Java Assessment | Career Guidance AI");
+        assertThat(rescheduled.subject()).isEqualTo("Assessment Rescheduled – Java Assessment | Career Guidance AI");
         assertThat(rescheduled.html()).contains("successfully rescheduled", "10:00 AM (IST)", "Start Assessment");
+
         Sent reminder = send(Type.REMINDER);
-        assertThat(reminder.message().getSubject()).isEqualTo("Reminder: Your Java Assessment Assessment Starts Soon");
+        assertThat(reminder.subject()).isEqualTo("Reminder: Your Java Assessment Assessment Starts Soon");
         assertThat(reminder.html()).contains("will begin soon", "Java Assessment", "Start Assessment");
     }
 
-    @Test void cancellationContainsNoActiveStartLink() throws Exception {
+    @Test
+    void cancellationContainsNoActiveStartLink() throws Exception {
         Sent sent = send(Type.CANCELLED);
-        assertThat(sent.message().getSubject()).isEqualTo("Assessment Cancelled – Java Assessment | Career Guidance AI");
+        assertThat(sent.subject()).isEqualTo("Assessment Cancelled – Java Assessment | Career Guidance AI");
         assertThat(sent.html()).contains("cancelled successfully", "Java Assessment", "Previously Scheduled Date",
                         "20 September 2026", "10:00 AM (IST)")
                 .doesNotContain("Start Assessment", "/student/scheduled-exams");
     }
 
-    @Test void missingAccountEmailIsHandledWithoutContactingSmtp() {
-        JavaMailSender sender = mock(JavaMailSender.class);
-        JavaMailEmailService service = service(sender, "sender@gmail.com", "sender@gmail.com");
-        ExamEmailDetails details = details(" ");
-        assertThat(service.sendExamScheduled(details)).isFalse();
-        verifyNoInteractions(sender);
+    @Test
+    void missingAccountEmailIsHandledWithoutHttpRequest() throws Exception {
+        HttpClient client = mock(HttpClient.class);
+        JavaMailEmailService service = service(client, "test_resend_key", "onboarding@resend.dev");
+        assertThat(service.sendExamScheduled(details(" "))).isFalse();
+        verifyNoInteractions(client);
     }
 
-    @Test void missingMailCredentialsAreHandledWithoutContactingSmtp() {
-        JavaMailSender sender = mock(JavaMailSender.class);
-        JavaMailEmailService service = service(sender, "", "");
+    @Test
+    void missingResendApiKeyIsHandledWithoutHttpRequest() throws Exception {
+        HttpClient client = mock(HttpClient.class);
+        JavaMailEmailService service = service(client, "", "onboarding@resend.dev");
         assertThat(service.sendExamScheduled(details("student@example.com"))).isFalse();
-        verifyNoInteractions(sender);
+        verifyNoInteractions(client);
+    }
+
+    @Test
+    void missingSenderIsHandledWithoutHttpRequest() throws Exception {
+        HttpClient client = mock(HttpClient.class);
+        JavaMailEmailService service = service(client, "test_resend_key", "");
+        assertThat(service.sendExamScheduled(details("student@example.com"))).isFalse();
+        verifyNoInteractions(client);
+    }
+
+    @Test
+    void resendHttpFailureReturnsFalse() throws Exception {
+        HttpClient client = mock(HttpClient.class);
+        @SuppressWarnings("unchecked")
+        HttpResponse<String> response = mock(HttpResponse.class);
+        when(response.statusCode()).thenReturn(403);
+        when(client.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenReturn(response);
+        JavaMailEmailService service = service(client, "test_resend_key", "onboarding@resend.dev");
+        assertThat(service.sendExamScheduled(details("student@example.com"))).isFalse();
+        verify(client).send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class));
     }
 
     private Sent send(Type type) throws Exception {
-        JavaMailSender sender = mock(JavaMailSender.class);
-        MimeMessage message = new JavaMailSenderImpl().createMimeMessage();
-        when(sender.createMimeMessage()).thenReturn(message);
-        JavaMailEmailService service = service(sender, "sender@gmail.com", "sender@gmail.com");
-        boolean result = switch (type) {
+        HttpClient client = mock(HttpClient.class);
+        @SuppressWarnings("unchecked")
+        HttpResponse<String> response = mock(HttpResponse.class);
+        when(response.statusCode()).thenReturn(200);
+        when(client.send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class))).thenReturn(response);
+        JavaMailEmailService service = service(client, "test_resend_key", "onboarding@resend.dev");
+
+        boolean success = switch (type) {
             case SCHEDULED -> service.sendExamScheduled(details("student@example.com"));
             case RESCHEDULED -> service.sendExamRescheduled(details("student@example.com"));
             case REMINDER -> service.sendExamReminder(details("student@example.com"));
             case CANCELLED -> service.sendExamCancelled(details("student@example.com"));
         };
-        assertThat(result).isTrue();
-        verify(sender).send(message);
-        message.saveChanges();
-        return new Sent(message, textPart(message, "text/plain"), textPart(message, "text/html"));
-    }
+        assertThat(success).isTrue();
 
-    private JavaMailEmailService service(JavaMailSender sender, String username, String from) {
-        return new JavaMailEmailService(sender, username, from, "Asia/Kolkata", "http://localhost:5173/");
-    }
+        var captor = org.mockito.ArgumentCaptor.forClass(HttpRequest.class);
+        verify(client).send(captor.capture(), any(HttpResponse.BodyHandler.class));
+        HttpRequest request = captor.getValue();
+        assertThat(request.uri().toString()).isEqualTo("https://api.resend.com/emails");
+        assertThat(request.method()).isEqualTo("POST");
+        assertThat(request.headers().firstValue("Authorization")).contains("Bearer test_resend_key");
+        assertThat(request.headers().firstValue("Content-Type")).contains("application/json");
 
-    private String textPart(Part part, String mimeType) throws Exception {
-        if (part.isMimeType(mimeType)) return part.getContent().toString();
-        if (part.isMimeType("multipart/*")) {
-            MimeMultipart multipart = (MimeMultipart) part.getContent();
-            for (int i = 0; i < multipart.getCount(); i++) {
-                String found = textPart(multipart.getBodyPart(i), mimeType);
-                if (found != null) return found;
+        HttpRequest.BodyPublisher publisher = request.bodyPublisher().orElseThrow();
+        java.io.ByteArrayOutputStream bytes = new java.io.ByteArrayOutputStream();
+        java.util.concurrent.CompletableFuture<Void> done = new java.util.concurrent.CompletableFuture<>();
+        publisher.subscribe(new java.util.concurrent.Flow.Subscriber<>() {
+            public void onSubscribe(java.util.concurrent.Flow.Subscription subscription) { subscription.request(Long.MAX_VALUE); }
+            public void onNext(java.nio.ByteBuffer buffer) {
+                byte[] chunk = new byte[buffer.remaining()];
+                buffer.get(chunk);
+                bytes.write(chunk, 0, chunk.length);
             }
-        }
-        return null;
+            public void onError(Throwable error) { done.completeExceptionally(error); }
+            public void onComplete() { done.complete(null); }
+        });
+        done.join();
+        JsonNode json = mapper.readTree(bytes.toByteArray());
+        assertThat(json.path("from").asText()).isEqualTo("onboarding@resend.dev");
+        assertThat(json.path("to").get(0).asText()).isEqualTo("student@example.com");
+        return new Sent(json.path("subject").asText(), json.path("text").asText(), json.path("html").asText());
+    }
+
+    private JavaMailEmailService service(HttpClient client, String apiKey, String from) {
+        JavaMailEmailService service = new JavaMailEmailService(
+                mapper, apiKey, from, "Asia/Kolkata", "http://localhost:5173/");
+        ReflectionTestUtils.setField(service, "httpClient", client);
+        return service;
     }
 
     private ExamEmailDetails details(String recipient) {
@@ -100,5 +146,5 @@ class JavaMailEmailServiceTest {
     }
 
     private enum Type { SCHEDULED, RESCHEDULED, REMINDER, CANCELLED }
-    private record Sent(MimeMessage message, String plain, String html) {}
+    private record Sent(String subject, String plain, String html) {}
 }

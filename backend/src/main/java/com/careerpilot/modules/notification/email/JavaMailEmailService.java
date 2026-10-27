@@ -1,11 +1,15 @@
 package com.careerpilot.modules.notification.email;
 
-import jakarta.mail.internet.MimeMessage;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.javamail.JavaMailSender;
-import org.springframework.mail.javamail.MimeMessageHelper;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.time.Duration;
+import java.util.Map;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -31,19 +35,21 @@ public class JavaMailEmailService implements EmailService {
             <li>Start the assessment only when you are ready.</li>
             """;
 
-    private final JavaMailSender mailSender;
-    private final String username;
+    private final HttpClient httpClient;
+    private final ObjectMapper objectMapper;
+    private final String resendApiKey;
     private final String from;
     private final ZoneId timeZone;
     private final String startUrl;
 
-    public JavaMailEmailService(JavaMailSender mailSender,
-                                @Value("${spring.mail.username:}") String username,
+    public JavaMailEmailService(ObjectMapper objectMapper,
+                                @Value("${RESEND_API_KEY:}") String resendApiKey,
                                 @Value("${careerpilot.mail.from:}") String from,
                                 @Value("${careerpilot.mail.time-zone:Asia/Kolkata}") String timeZone,
                                 @Value("${careerpilot.mail.frontend-url:http://localhost:5173}") String frontendUrl) {
-        this.mailSender = mailSender;
-        this.username = username;
+        this.httpClient = HttpClient.newBuilder().connectTimeout(Duration.ofSeconds(10)).build();
+        this.objectMapper = objectMapper;
+        this.resendApiKey = resendApiKey;
         this.from = from;
         this.timeZone = ZoneId.of(timeZone);
         this.startUrl = UriComponentsBuilder.fromUriString(frontendUrl).replacePath("/student/scheduled-exams")
@@ -76,22 +82,37 @@ public class JavaMailEmailService implements EmailService {
             log.warn("Exam email skipped because the account email is missing; notificationType={} scheduleId={}", notificationType, d.scheduledExamId());
             return false;
         }
-        if (username == null || username.isBlank() || from == null || from.isBlank()) {
-            log.warn("Exam email skipped because MAIL_USERNAME or MAIL_FROM is not configured; notificationType={} scheduleId={}", notificationType, d.scheduledExamId());
+        if (resendApiKey == null || resendApiKey.isBlank() || from == null || from.isBlank()) {
+            log.warn("Exam email skipped: RESEND_API_KEY or sender address is missing; notificationType={} scheduleId={}",
+                    notificationType, d.scheduledExamId());
             return false;
         }
         try {
-            MimeMessage mime = mailSender.createMimeMessage();
-            MimeMessageHelper helper = new MimeMessageHelper(mime, true, StandardCharsets.UTF_8.name());
-            helper.setFrom(from);
-            helper.setTo(d.recipientEmail());
-            helper.setSubject(subject);
             boolean cancellation = "CANCELLED".equals(notificationType);
-            helper.setText(plainText(d, introduction, includeButton, includeCategory, cancellation),
-                    html(d, introduction, includeButton, includeCategory, cancellation));
-            mailSender.send(mime);
-            return true;
-        } catch (RuntimeException | jakarta.mail.MessagingException exception) {
+            String payload = objectMapper.writeValueAsString(Map.of(
+                    "from", from,
+                    "to", new String[]{d.recipientEmail()},
+                    "subject", subject,
+                    "text", plainText(d, introduction, includeButton, includeCategory, cancellation),
+                    "html", html(d, introduction, includeButton, includeCategory, cancellation)
+            ));
+            HttpRequest request = HttpRequest.newBuilder(URI.create("https://api.resend.com/emails"))
+                    .timeout(Duration.ofSeconds(20))
+                    .header("Authorization", "Bearer " + resendApiKey)
+                    .header("Content-Type", "application/json")
+                    .POST(HttpRequest.BodyPublishers.ofString(payload, StandardCharsets.UTF_8))
+                    .build();
+            HttpResponse<String> response = httpClient.send(request, HttpResponse.BodyHandlers.ofString());
+            if (response.statusCode() >= 200 && response.statusCode() < 300) {
+                log.info("Exam email accepted by Resend; notificationType={} scheduleId={}",
+                        notificationType, d.scheduledExamId());
+                return true;
+            }
+            log.warn("Resend rejected exam email; notificationType={} scheduleId={} httpStatus={}",
+                    notificationType, d.scheduledExamId(), response.statusCode());
+            return false;
+        } catch (Exception exception) {
+            if (exception instanceof InterruptedException) Thread.currentThread().interrupt();
             log.warn("Exam email delivery failed; notificationType={} scheduleId={} errorType={} message={}",
                     notificationType, d.scheduledExamId(), exception.getClass().getSimpleName(), sanitized(exception));
             return false;
